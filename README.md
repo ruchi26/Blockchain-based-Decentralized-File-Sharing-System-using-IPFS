@@ -1,0 +1,2 @@
+# Blockchain-based-Decentralized-Storage-System
+The aim is to create a decentralized storage system using blockchain where people with excess computer storage will rent their storage space for a reward and users looking to store their data on the cloud will be giving the reward (or a fee ) for the storage space. The users' files will be encrypted and stored in a distributed fashion over a peer to peer network.
