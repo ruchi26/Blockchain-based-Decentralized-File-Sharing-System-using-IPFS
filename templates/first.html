@@ -15,17 +15,6 @@ form {
     background-color: #f2f2f2;
 }
 
-input[type="file"] {
-    display: none;
-}
-
-.custom-file-upload {
-    border: 1px solid #ccc;
-    display: inline-block;
-    padding: 10px 15px;
-    cursor: pointer;
-}
-
 input[type=submit] {
   width: 60%;
   background-color: #4CAF50;
@@ -47,25 +36,22 @@ input[type=submit] {
 <form method="post" action="/" enctype="multipart/form-data">
     <dl>
 
-    <h2>File sharing portal</h2>
-
-    <p>
-      	{% with messages = get_flashed_messages() %}
-      	  {% if messages %}
-      		<ul class=flashes>
-      		{% for message in messages %}
-      		  <li>{{ message }}</li>
-      		{% endfor %}
-      		</ul>
-      	  {% endif %}
-      	{% endwith %}
-    </p>
+		<h2>File sharing portal</h2>
 
 		<p>
-			<label class="custom-file-upload">
-    			<input type="file" name="file" autocomplete="off" required>
-          Click here to upload the file
-			</label>
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				<ul class=flashes>
+				{% for message in messages %}
+				<li>{{ message }}</li>
+				{% endfor %}
+				</ul>
+			{% endif %}
+			{% endwith %}
+		</p>
+
+		<p>
+			<input type="file" name="file" autocomplete="off" required>
 		</p>
     </dl>
     <p>
