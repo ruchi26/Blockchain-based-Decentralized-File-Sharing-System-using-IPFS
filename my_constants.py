@@ -1,6 +1,6 @@
 from flask import Flask
 
-UPLOAD_FOLDER = 'F:/Blockchain-based-Decentralized-Storage-System/uploads'
+UPLOAD_FOLDER = 'F:/Blockchain-based-Decentralized-Storage-System/go-ipfs'
 
 app = Flask(__name__)
 app.secret_key = "secret key"

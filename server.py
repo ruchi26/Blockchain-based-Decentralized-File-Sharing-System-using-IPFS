@@ -7,14 +7,13 @@ from werkzeug.utils import secure_filename
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
-
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def hashed(filename):
-    api = ipfshttpclient.connect('127.0.0.1', 5001)
-    res = api.add(filename)
-    return  res['Hash']
+    client = ipfshttpclient.connect('/ip4/127.0.0.1/tcp/5001/http')
+    hashed_file = client.add(filename)['Hash']
+    return  hashed_file
 
 @app.route('/')
 def home():
@@ -35,8 +34,8 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             flash('File successfully uploaded')
-            hashed_output = hashed(filename)
-            flash(hashed_output)
+            hashed_output1 = hashed(filename)
+            flash(hashed_output1)
             return redirect('/')
         else:
             flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
