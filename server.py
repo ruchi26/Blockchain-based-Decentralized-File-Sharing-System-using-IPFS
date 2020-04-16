@@ -39,8 +39,8 @@ def add_file():
                 message = 'File successfully uploaded'
                 file_hash = 'ABDEFgh'
             # hashed_output1 = hashed(filename)
-                sender = 'Ruchika'
-                receiver = 'Souvik'
+                sender = request.form['sender_name']
+                receiver = request.form['receiver_name']
                 index = blockchain.add_file(sender, receiver, file_hash)
                 message = f'This file will be added to Block {index}'
             else:

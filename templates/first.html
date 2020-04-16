@@ -1,65 +1,75 @@
 <!doctype html>
-<title>File Upload center</title>
+	<title>File Upload center</title>
 
 
-<style>
+	<style>
 
-body{
-  background-color: #95C6C8;
-}
+		body{
+		background-color: #95C6C8;
+		}
 
-form {
-    padding: 2%;
-    margin: 18% auto;
-    width: 20%;
-    background-color: #f2f2f2;
-}
+		form {
+			padding: 2%;
+			margin: 18% auto;
+			width: 20%;
+			background-color: #f2f2f2;
+		}
 
-input[type=submit] {
-  width: 60%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 1% 0%;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+		input[type=submit] {
+		width: 60%;
+		background-color: #4CAF50;
+		color: white;
+		padding: 14px 20px;
+		margin: 1% 0%;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+		}
 
-</style>
+	</style>
 
+	<form method="post" action="/add_file" enctype="multipart/form-data">
+		<dl>
 
+			<h2>File sharing portal</h2>
+			<!-- 
+			<p>
+				{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					<ul class=flashes>
+					{% for message in messages %}
+					<li>{{ message }}</li>
+					{% endfor %}
+					</ul>
+				{% endif %}
+				{% endwith %}
+			</p> -->
 
+			<p>
 
+				<label>
+					Sender:
+				</label>
+				<br>
+				<input type="text" id="sender_name">
+				<br>
+			</p>
+			<p>
+				<label>
+					Receiver:
+				</label>
+				<br>
+				<input type="text" id="receiver_name">
+				<br>
+			</p>
 
-
-<form method="post" action="/add_file" enctype="multipart/form-data">
-    <dl>
-
-		<h2>File sharing portal</h2>
+			<p>
+				<input type="file" name="file" autocomplete="off" required>
+			</p>
+		</dl>
 
 		<p>
-			{% with messages = get_flashed_messages() %}
-			{% if messages %}
-				<ul class=flashes>
-				{% for message in messages %}
-				<li>{{ message }}</li>
-				{% endfor %}
-				</ul>
-			{% endif %}
-			{% endwith %}
+			<input type="submit" value="Submit">
 		</p>
-
-		<p>
-      <label>Sender:</label><br>
-      <input type="text" id="sendername"><br>
-      <label>Receiver:</label><br>
-      <input type="text" id="receivername"><br>
-			<input type="file" name="file" autocomplete="off" required>
-		</p>
-    </dl>
-    <p>
-		<input type="submit" value="Submit">
-	</p>
-
-</form>
+	</form>
+</html>
