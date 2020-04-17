@@ -3,11 +3,17 @@
 
   <body>
 
+    {{messages['message']}}
+    <br>
+    The Blockchain is displayed below: 
+    <br>
+    {{messages['blockchain']}}
 
-    <form method="post" action="/view_blockchain" enctype="multipart/form-data">
+    <form method="GET" action="/" enctype="multipart/form-data">
 
       <p>
-        {{argument}}
+
+    
       </p>
 
       <input type="submit" value="Add another file">

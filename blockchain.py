@@ -73,7 +73,8 @@ class Blockchain:
                                   'file_hash': file_hash})
         previous_block = self.get_previous_block()
         index = previous_block['index'] + 1
-        if len(self.shared_files) == 10:
+        # To be changed to 10 later
+        if len(self.shared_files) == 1:
             previous_proof = previous_block['proof']
             proof = self.proof_of_work(previous_proof)
             previous_hash = self.hash(previous_block)

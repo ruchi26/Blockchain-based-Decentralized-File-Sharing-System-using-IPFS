@@ -25,6 +25,9 @@ def home():
 @app.route('/add_file', methods=['POST'])
 def add_file():
     if request.method == 'POST':
+
+        error_flag = True
+
         # check if the post request has the file part
         if 'file' not in request.files:
             message = 'No file part'
@@ -38,15 +41,22 @@ def add_file():
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 message = 'File successfully uploaded'
                 file_hash = 'ABDEFgh'
-            # hashed_output1 = hashed(filename)
+                 # hashed_output1 = hashed(filename)
                 sender = request.form['sender_name']
                 receiver = request.form['receiver_name']
                 index = blockchain.add_file(sender, receiver, file_hash)
                 message = f'This file will be added to Block {index}'
+                error_flag = False
             else:
                 message = 'Allowed file types are txt, pdf, png, jpg, jpeg, gif'
-        response = {'message': message}
-        return jsonify(response),  201
+
+        chain = blockchain.chain
+        response = {'message': message, 'blockchain': chain}
+
+        if error_flag == True:
+            return render_template('first.html', messages = response)
+        else:
+            return render_template('second.html',messages = response)
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=False)
