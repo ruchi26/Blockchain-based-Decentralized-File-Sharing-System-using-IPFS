@@ -28,6 +28,13 @@ def hashed(filename):
     hashed_file = response.json()['Hash']
     return  hashed_file
 
+def retrieve_from_hash(file_hash):
+    url = 'https://ipfs.infura.io:5001/api/v0/block/get'
+    response = request_file_hash.post(url, key = file_hash)
+    print(response)
+    user_file = response
+    return user_file
+
 @app.route('/')
 def home():
     return render_template('first.html')
@@ -67,6 +74,30 @@ def add_file():
             return render_template('first.html', messages = response)
         else:
             return render_template('second.html',messages = response)
+
+@app.route('/retrieve_file', methods=['POST'])
+def retrieve_file():
+    if request.method == 'POST':
+
+        message = ''
+        error_flag = True
+
+        if request.form['file_hash'] == '':
+            message = 'No hash entered'
+        if len(request.form['file_hash']) != 64:
+            message = 'Incorrect hash'
+        else:
+            error_flag = False
+            file_hash = request.form['file_hash']
+            user_file = retrieve_from_hash(file_hash)
+            print(user_file)
+
+        if error_flag == True:
+            return render_template('first.html', messages = {'message' : message})
+        else:
+            return render_template('second.html',messages = {'message' : message})
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=False)

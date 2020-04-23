@@ -32,18 +32,6 @@
 		<dl>
 
 			<h2>File sharing portal</h2>
-			<!--
-			<p>
-				{% with messages = get_flashed_messages() %}
-				{% if messages %}
-					<ul class=flashes>
-					{% for message in messages %}
-					<li>{{ message }}</li>
-					{% endfor %}
-					</ul>
-				{% endif %}
-				{% endwith %}
-			</p> -->
 
 			<p>
 
@@ -80,5 +68,28 @@
 		<p>
 			<input type="submit" value="Submit">
 		</p>
+	</form>
+
+	<form method="post" action="/retrieve_file" enctype="multipart/form-data">
+		<dl>
+
+			<p>
+
+				<label>
+					Enter file hash :
+				</label>
+
+				<br>
+				<input type="text" name="file_hash">
+				<br>
+
+			</p>
+
+		</dl>
+
+		<p>
+			<input type="submit" value="Retrieve File">
+		</p>
+		
 	</form>
 </html>
