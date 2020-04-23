@@ -2,10 +2,14 @@ import os
 import urllib.request
 import ipfshttpclient
 from my_constants import app
-from flask import Flask, flash, request, redirect, render_template, request, url_for, jsonify
+from flask import Flask, flash, request, redirect, render_template, url_for, jsonify
 from werkzeug.utils import secure_filename
 from blockchain import Blockchain
-import requests
+import requests as request_file_hash
+
+                # This package is used in the 'hashed' function while getting the hash of the file.
+                # Notice that this package , 'requests' is different than the package 'request'.
+                # 'request' package is used in the 'add_file' function for multiple actions.
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -16,15 +20,12 @@ def allowed_file(filename):
 
 def hashed(filename):
     url = 'https://ipfs.infura.io:5001/api/v0/add'
-    files = {
-        'file' : (filename),
-    }
-    response = requests.post(url, files=files)
-    p = response.json()
-    print(p['Hash'])
+    user_file = { 'file' : (filename), }
+    response = request_file_hash.post(url, files = user_file)
+    #print(p['Hash'])
     # client = ipfshttpclient.connect('/dns/ipfs.infura.io/tcp/5001/https')
     # result = client.add(filename)
-    hashed_file = p['Hash']
+    hashed_file = response.json()['Hash']
     return  hashed_file
 
 @app.route('/')
