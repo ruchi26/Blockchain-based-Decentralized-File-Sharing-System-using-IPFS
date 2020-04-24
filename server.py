@@ -28,7 +28,11 @@ def hash_user_file(file_content):
 def retrieve_from_hash(file_hash):
     url = 'https://ipfs.infura.io:5001/api/v0/cat?arg=' + file_hash
     response = requests.get(url)
-    file_content = response.text
+    file_content = (response.text).encode('utf8')
+    
+    file_path = os.path.join(app.config['DOWNLOAD_FOLDER'], file_hash)
+    user_file = open(file_path, 'ab')
+    user_file.write(file_content)
     return file_content
 
 @app.route('/')
