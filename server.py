@@ -20,34 +20,43 @@ blockchain = Blockchain()
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def append_file_extension(uploaded_file, file_path):
+    file_extension = uploaded_file.filename.rsplit('.', 1)[1].lower()
+    user_file = open(file_path, 'a')
+    user_file.write('\n' + file_extension)
+    user_file.close()
+
 def hash_user_file(user_file):
     # url = 'https://ipfs.infura.io:5001/api/v0/add'
     # user_file = { 'file' : (file_content), }
     # response = requests.post(url, files = user_file)
     # hashed_file = response.json()['Hash']
     # return hashed_file
-
-    
-
-    res = client.add('/Users/souviksaha/Desktop/Walllpapers/silhouette-of-golden-gate-bridge-during-golden-hour-1485894.jpg')
-    print(res)
-    return(res['Hash'])
+    response = client.add(user_file)
+    file_hash = response['Hash']
+    return file_hash
 
 def retrieve_from_hash(file_hash):
     # url = 'https://ipfs.infura.io:5001/api/v0/cat?arg=' + file_hash
     # response = requests.get(url)
     # file_content = (response.text).encode()
-    
     # file_path = os.path.join(app.config['DOWNLOAD_FOLDER'], 'IPFS')
     # user_file = open(file_path, 'ab+')
     # user_file.write(file_content)
     # return file_content
-
-    
-
-    client.get(file_hash)
-    received_file = client.cat(file_hash)
-    return received_file
+    file_content = client.cat(file_hash)
+    file_path = os.path.join(app.config['DOWNLOAD_FOLDER'], file_hash)
+    user_file = open(file_path, 'ab+')
+    user_file.write(file_content)
+    with open(file_path, 'rb') as f:
+        lines = f.read().splitlines()
+        last_line = lines[-1]
+    user_file.close()
+    file_extension = last_line
+    saved_file = file_path + '.' + file_extension.decode()
+    os.rename(file_path, saved_file)
+    print(saved_file)
+    return saved_file
 
 @app.route('/')
 def home():
@@ -68,11 +77,10 @@ def add_file():
                 filename = secure_filename(user_file.filename)
                 file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 user_file.save(file_path)
+                append_file_extension(user_file, file_path)
                 message = 'File successfully uploaded'
                 #file_content = open(file_path, 'rb').read()
-
-                hashed_output1 = hash_user_file(user_file)
-                
+                hashed_output1 = hash_user_file(file_path)
                 sender = request.form['sender_name']
                 receiver = request.form['receiver_name']
                 index = blockchain.add_file(sender, receiver, hashed_output1)
@@ -93,23 +101,20 @@ def add_file():
 def retrieve_file():
     if request.method == 'POST':
 
-        message = ''
         error_flag = True
 
         if request.form['file_hash'] == '':
             message = 'No hash entered'
-        #if len(request.form['file_hash']) != 64:
-        #   message = 'Incorrect hash '+ request.form['file_hash']
         else:
             error_flag = False
             file_hash = request.form['file_hash']
-            file_content = retrieve_from_hash(file_hash)
-            message = 'File successfully retrieved'
+            file_path = retrieve_from_hash(file_hash)
+            message = 'File successfully downloaded'
 
         if error_flag == True:
-            return render_template('second.html', messages = {'message' : message , 'blockchain' : file_content})
+            return render_template('second.html', messages = {'message' : message , 'blockchain' : ''})
         else:
-            return render_template('second.html',messages = {'message' : message , 'blockchain' : file_content})
+            return render_template('second.html',messages = {'message' : message , 'blockchain' : file_path})
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=False)
