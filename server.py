@@ -13,27 +13,41 @@ import requests
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
+client = ipfshttpclient.connect('/ip4/127.0.0.1/tcp/5001/http')
+
 blockchain = Blockchain()
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def hash_user_file(file_content):
-    url = 'https://ipfs.infura.io:5001/api/v0/add'
-    user_file = { 'file' : (file_content), }
-    response = requests.post(url, files = user_file)
-    hashed_file = response.json()['Hash']
-    return hashed_file
+def hash_user_file(user_file):
+    # url = 'https://ipfs.infura.io:5001/api/v0/add'
+    # user_file = { 'file' : (file_content), }
+    # response = requests.post(url, files = user_file)
+    # hashed_file = response.json()['Hash']
+    # return hashed_file
+
+    
+
+    res = client.add('/Users/souviksaha/Desktop/Walllpapers/silhouette-of-golden-gate-bridge-during-golden-hour-1485894.jpg')
+    print(res)
+    return(res['Hash'])
 
 def retrieve_from_hash(file_hash):
-    url = 'https://ipfs.infura.io:5001/api/v0/cat?arg=' + file_hash
-    response = requests.get(url)
-    file_content = (response.text).encode('utf8')
+    # url = 'https://ipfs.infura.io:5001/api/v0/cat?arg=' + file_hash
+    # response = requests.get(url)
+    # file_content = (response.text).encode()
     
-    file_path = os.path.join(app.config['DOWNLOAD_FOLDER'], file_hash)
-    user_file = open(file_path, 'ab')
-    user_file.write(file_content)
-    return file_content
+    # file_path = os.path.join(app.config['DOWNLOAD_FOLDER'], 'IPFS')
+    # user_file = open(file_path, 'ab+')
+    # user_file.write(file_content)
+    # return file_content
+
+    
+
+    client.get(file_hash)
+    received_file = client.cat(file_hash)
+    return received_file
 
 @app.route('/')
 def home():
@@ -55,8 +69,10 @@ def add_file():
                 file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 user_file.save(file_path)
                 message = 'File successfully uploaded'
-                file_content = open(file_path, 'rb').read()
-                hashed_output1 = hash_user_file( file_content)
+                #file_content = open(file_path, 'rb').read()
+
+                hashed_output1 = hash_user_file(user_file)
+                
                 sender = request.form['sender_name']
                 receiver = request.form['receiver_name']
                 index = blockchain.add_file(sender, receiver, hashed_output1)
@@ -67,7 +83,7 @@ def add_file():
 
         chain = blockchain.chain
         response = {'message': message, 'blockchain': chain}
-
+    
         if error_flag == True:
             return render_template('first.html', messages = response)
         else:
