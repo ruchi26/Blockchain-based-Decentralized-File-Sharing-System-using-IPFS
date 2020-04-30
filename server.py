@@ -59,8 +59,12 @@ def retrieve_from_hash(file_hash):
     return saved_file
 
 @app.route('/')
-def home():
+def index():
     return render_template('index.html')
+
+@app.route('/home')
+def home():
+    return render_template('first.html')
 
 @app.route('/add_file', methods=['POST'])
 def add_file():
