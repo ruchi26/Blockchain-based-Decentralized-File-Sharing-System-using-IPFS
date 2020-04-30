@@ -81,9 +81,9 @@ class Blockchain:
             block = self.create_block(proof, previous_hash)
         return index
     
-    def add_node(self, address):
-        parsed_url = urlparse(address)
-        self.nodes.add(parsed_url.netloc)
+    # def add_node(self, address):
+    #     parsed_url = urlparse(address)
+    #     self.nodes.add(parsed_url.netloc)
     
     def replace_chain(self):
         network = self.nodes
@@ -152,9 +152,7 @@ class Blockchain:
 #     response = {'message': f'This file will be added to Block {index}'}
 #     return jsonify(response), 201
 
-# Part 3 - Decentralizing our Blockchain
 
-# Connecting new nodes
 # @app.route('/connect_node', methods = ['POST'])
 # def connect_node():
 #     json = request.get_json()

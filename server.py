@@ -60,7 +60,7 @@ def retrieve_from_hash(file_hash):
 
 @app.route('/')
 def home():
-    return render_template('first.html')
+    return render_template('index.html')
 
 @app.route('/add_file', methods=['POST'])
 def add_file():
@@ -115,6 +115,31 @@ def retrieve_file():
             return render_template('second.html', messages = {'message' : message , 'blockchain' : ''})
         else:
             return render_template('second.html',messages = {'message' : message , 'blockchain' : file_path})
+
+# Replacing the chain by the longest chain if needed
+@app.route('/replace_chain', methods = ['GET'])
+def replace_chain():
+    is_chain_replaced = blockchain.replace_chain()
+    if is_chain_replaced:
+        response = {'message': 'The nodes had different chains so the chain was replaced by the longest one.',
+                    'blockchain': blockchain.chain}
+    else:
+        response = {'message': 'All good. The chain is the largest one.',
+                    'blockchain': blockchain.chain}
+    return render_template('second.html', messages = response)
+
+# Getting the full Blockchain
+@app.route('/get_chain', methods = ['GET'])
+def get_chain():
+    response = {'chain': blockchain.chain,
+                'length': len(blockchain.chain)}
+    return jsonify(response), 200
+
+@app.route("/connect_to_blockchain", methods=["GET"])
+def connect_to_blockchain():
+    node_ip = request.environ['HTTP_HOST']
+    blockchain.nodes.add(node_ip)
+    return render_template('first.html')
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=False)
