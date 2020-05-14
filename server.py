@@ -4,21 +4,25 @@ import ipfshttpclient
 from my_constants import app
 from flask import Flask, flash, request, redirect, render_template, url_for, jsonify
 from werkzeug.utils import secure_filename
+from flask_socketio import SocketIO, send, emit
+import socket
+import pickle
 from blockchain import Blockchain
 import requests
+import socketio
 
 # The package requests is used in the 'hash_user_file' and 'retrieve_from hash' functions to send http post requests.
 # Notice that 'requests' is different than the package 'request'.
 # 'request' package is used in the 'add_file' function for multiple actions.
 
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+sio = socketio.Client() 
+client_ip = app.config['NODE_ADDR']
 
-# client = ipfshttpclient.connect('/ip4/127.0.0.1/tcp/5001/http')
 
 blockchain = Blockchain()
 
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 def append_file_extension(uploaded_file, file_path):
     file_extension = uploaded_file.filename.rsplit('.', 1)[1].lower()
@@ -90,6 +94,14 @@ def home():
 
 @app.route('/add_file', methods=['POST'])
 def add_file():
+    
+    is_chain_replaced = blockchain.replace_chain()
+
+    if is_chain_replaced:
+        print('The nodes had different chains so the chain was replaced by the longest one.')
+    else:
+        print('All good. The chain is the largest one.')
+
     if request.method == 'POST':
         error_flag = True
         if 'file' not in request.files:
@@ -140,17 +152,17 @@ def retrieve_file():
         else:
             return render_template('second.html',messages = {'message1' : message , 'message2' : "Path of the downloaded file : " + file_path , 'blockchain' : blockchain.chain})
 
-# Replacing the chain by the longest chain if needed
-@app.route('/replace_chain', methods = ['GET'])
-def replace_chain():
-    is_chain_replaced = blockchain.replace_chain()
-    if is_chain_replaced:
-        response = {'message': 'The nodes had different chains so the chain was replaced by the longest one.',
-                    'blockchain': blockchain.chain}
-    else:
-        response = {'message': 'All good. The chain is the largest one.',
-                    'blockchain': blockchain.chain}
-    return render_template('second.html', messages = response)
+# # Replacing the chain by the longest chain if needed
+# @app.route('/replace_chain', methods = ['GET'])
+# def replace_chain():
+#     is_chain_replaced = blockchain.replace_chain()
+#     if is_chain_replaced:
+#         response = {'message': 'The nodes had different chains so the chain was replaced by the longest one.',
+#                     'blockchain': blockchain.chain}
+#     else:
+#         response = {'message': 'All good. The chain is the largest one.',
+#                     'blockchain': blockchain.chain}
+#     return render_template('second.html', messages = response)
 
 # Getting the full Blockchain
 @app.route('/get_chain', methods = ['GET'])
@@ -159,11 +171,27 @@ def get_chain():
                 'length': len(blockchain.chain)}
     return jsonify(response), 200
 
+@sio.event
+def connect():
+    print('connected to server')
+
+@sio.event
+def disconnect():
+    print('disconnected from server')
+
+@sio.event
+def my_response(message):
+    print(pickle.loads(message['data']))
+    blockchain.nodes = pickle.loads(message['data'])
+
 @app.route("/connect_to_blockchain", methods=["GET"])
 def connect_to_blockchain():
-    node_ip = request.environ['HTTP_HOST']
-    blockchain.nodes.add(node_ip)
+
+    sio.connect('http://'+app.config['SERVER_IP'])
+    sio.emit('add_client_node', 
+            {'node_address' : client_ip['Host'] + ':' + str(client_ip['Port'])}
+            )
     return render_template('first.html')
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=False)
+    app.run(host = client_ip['Host'], port= client_ip['Port'])
