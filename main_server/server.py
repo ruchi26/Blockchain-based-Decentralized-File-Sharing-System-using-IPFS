@@ -16,7 +16,6 @@ import requests
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 socketio = SocketIO(app)
-# client = ipfshttpclient.connect('/ip4/127.0.0.1/tcp/5001/http')
 
 blockchain = Blockchain()
 
@@ -30,44 +29,12 @@ def append_file_extension(uploaded_file, file_path):
     user_file.close()
 
 def hash_user_file(user_file):
-    # url = 'https://ipfs.infura.io:5001/api/v0/add'
-    # user_file = { 'file' : (user_file1), }
-    # response = requests.post(url, files = user_file)
-    # hashed_file = response.json()['Hash']
-    # return hashed_file
-
-    # response = client.add(user_file)
-    # file_hash = response['Hash']
-    # return file_hash
-    
     client = ipfshttpclient.connect('/dns/ipfs.infura.io/tcp/5001/https')
     response = client.add(user_file)
     file_hash = response['Hash']
     return file_hash
 
 def retrieve_from_hash(file_hash):
-    # url = 'https://ipfs.infura.io:5001/api/v0/cat?arg=' + file_hash
-    # response = requests.get(url)
-    # file_content = (response.text).encode()
-    # file_path = os.path.join(app.config['DOWNLOAD_FOLDER'], 'IPFS')
-    # user_file = open(file_path, 'ab+')
-    # user_file.write(file_content)
-    # return file_content
-
-    # file_content = client.cat(file_hash)
-    # file_path = os.path.join(app.config['DOWNLOAD_FOLDER'], file_hash)
-    # user_file = open(file_path, 'ab+')
-    # user_file.write(file_content)
-    # with open(file_path, 'rb') as f:
-    #     lines = f.read().splitlines()
-    #     last_line = lines[-1]
-    # user_file.close()
-    # file_extension = last_line
-    # saved_file = file_path + '.' + file_extension.decode()
-    # os.rename(file_path, saved_file)
-    # print(saved_file)
-    # return saved_file
-
     client = ipfshttpclient.connect('/dns/ipfs.infura.io/tcp/5001/https')
     file_content = client.cat(file_hash)
     file_path = os.path.join(app.config['DOWNLOAD_FOLDER'], file_hash)
@@ -116,9 +83,6 @@ def add_file():
                 user_file.save(file_path)
                 append_file_extension(user_file, file_path)
                 message = 'File successfully uploaded to infura'
-                
-                # file_content = open(file_path, 'rb').read()
-
                 hashed_output1 = hash_user_file(file_path)
                 sender = request.form['sender_name']
                 receiver = request.form['receiver_name']
@@ -157,41 +121,12 @@ def retrieve_file():
         else:
             return render_template('second.html',messages = {'message1' : message , 'message2' : "Path of the downloaded file " + file_path , 'blockchain' : chain})
 
-# # Replacing the chain by the longest chain if needed
-# @app.route('/replace_chain', methods = ['GET'])
-# def replace_chain():
-#     is_chain_replaced = blockchain.replace_chain()
-#     if is_chain_replaced:
-#         response = {'message': 'The nodes had different chains so the chain was replaced by the longest one.',
-#                     'blockchain': blockchain.chain}
-#     else:
-#         response = {'message': 'All good. The chain is the largest one.',
-#                     'blockchain': blockchain.chain}
-#     return render_template('second.html', messages = response)
-
 # Getting the full Blockchain
 @app.route('/get_chain', methods = ['GET'])
 def get_chain():
     response = {'chain': blockchain.chain,
                 'length': len(blockchain.chain)}
     return jsonify(response), 200
-
-# @app.route("/connect_to_blockchain", methods=["GET"])
-# def connect_to_blockchain():
-#     # node_ip = request.environ['HTTP_HOST']
-#     # print(request.environ)
-#     TCP_IP = '127.0.0.1'
-#     TCP_PORT = 5003
-#     # BUFFER_SIZE = 20
-#     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#     s.bind((TCP_IP, TCP_PORT))
-#     s.listen(1)  
-#     conn, addr = s.accept()
-#     print(addr)
-#     blockchain.nodes.add(addr[0] + ':' + str(addr[1]))
-#     conn.sendall(repr(blockchain.nodes).encode('utf-8'))
-#     conn.close()
-#     return render_template('first.html')
 
 @socketio.on('connect')
 def handle_connect():
