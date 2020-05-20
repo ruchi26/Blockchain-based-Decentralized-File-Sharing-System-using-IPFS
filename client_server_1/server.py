@@ -2,6 +2,7 @@ import os
 import urllib.request
 import ipfshttpclient
 from my_constants import app
+import pyAesCrypt
 from flask import Flask, flash, request, redirect, render_template, url_for, jsonify
 from werkzeug.utils import secure_filename
 from flask_socketio import SocketIO, send, emit
@@ -29,9 +30,19 @@ def append_file_extension(uploaded_file, file_path):
     user_file.write('\n' + file_extension)
     user_file.close()
 
+def decrypt_file(file_path, file_key):
+    encrypted_file = file_path + ".aes"
+    os.rename(file_path, encrypted_file)
+    pyAesCrypt.decryptFile(encrypted_file, file_path,  file_key, app.config['BUFFER_SIZE'])
+
+def encrypt_file(file_path, file_key):
+    pyAesCrypt.encryptFile(file_path, file_path + ".aes",  file_key, app.config['BUFFER_SIZE'])
+
 def hash_user_file(user_file):
+    encrypt_file(user_file, file_key)
+    encrypted_file_path = user_file + ".aes"
     client = ipfshttpclient.connect('/dns/ipfs.infura.io/tcp/5001/https')
-    response = client.add(user_file)
+    response = client.add(encrypted_file_path)
     file_hash = response['Hash']
     return file_hash
 
@@ -41,6 +52,8 @@ def retrieve_from_hash(file_hash):
     file_path = os.path.join(app.config['DOWNLOAD_FOLDER'], file_hash)
     user_file = open(file_path, 'ab+')
     user_file.write(file_content)
+    user_file.close()
+    decrypt_file(file_path, file_key)
     with open(file_path, 'rb') as f:
         lines = f.read().splitlines()
         last_line = lines[-1]
@@ -83,9 +96,11 @@ def add_file():
                 file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 user_file.save(file_path)
                 append_file_extension(user_file, file_path)
-                hashed_output1 = hash_user_file(file_path)
+                file_key = 'temp_kuch_bhi'
+                # file_key = request.form['file_key']
                 sender = request.form['sender_name']
                 receiver = request.form['receiver_name']
+                hashed_output1 = hash_user_file(file_path, file_key)
                 index = blockchain.add_file(sender, receiver, hashed_output1)
                 message = f'File successfully uploaded to Infura. This file will be added to Block {index}'
                 error_flag = False
@@ -108,6 +123,8 @@ def retrieve_file():
         else:
             error_flag = False
             file_hash = request.form['file_hash']
+            file_key = 'temp_kuch_bhi'
+            # file_key = request.form['file_key']
             file_path = retrieve_from_hash(file_hash)
             message = 'File successfully downloaded from infura'
 
