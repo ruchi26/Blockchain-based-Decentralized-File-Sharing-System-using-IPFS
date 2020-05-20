@@ -18,6 +18,7 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 socketio = SocketIO(app)
 # client = ipfshttpclient.connect('/ip4/127.0.0.1/tcp/5001/http')
 
+
 blockchain = Blockchain()
 
 def allowed_file(filename):
@@ -115,26 +116,22 @@ def add_file():
                 file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 user_file.save(file_path)
                 append_file_extension(user_file, file_path)
-                message = 'File successfully uploaded to infura'
-                
+
                 # file_content = open(file_path, 'rb').read()
 
                 hashed_output1 = hash_user_file(file_path)
                 sender = request.form['sender_name']
                 receiver = request.form['receiver_name']
                 index = blockchain.add_file(sender, receiver, hashed_output1)
-                message = f'This file will be added to Block {index}'
+                message = f'File successfully uploaded to Infura. This file will be added to Block {index}'
                 error_flag = False
             else:
                 message = 'Allowed file types are txt, pdf, png, jpg, jpeg, gif'
-
-        chain = blockchain.chain
-        response = {'message': message, 'blockchain': chain}
     
         if error_flag == True:
-            return render_template('first.html', messages = response)
+            return render_template('first.html')
         else:
-            return render_template('second.html',messages = response)
+            return render_template('second.html', messages = {'message1' : message , 'message2' : "Path of the uploaded file : " + file_path , 'blockchain' : blockchain.chain})
 
 @app.route('/retrieve_file', methods=['POST'])
 def retrieve_file():
@@ -143,19 +140,17 @@ def retrieve_file():
         error_flag = True
 
         if request.form['file_hash'] == '':
-            message = 'No hash entered. Use the "Add another file" button to enter the hash'
+            message = 'No hash entered.'
         else:
             error_flag = False
             file_hash = request.form['file_hash']
             file_path = retrieve_from_hash(file_hash)
             message = 'File successfully downloaded from infura'
 
-        chain = blockchain.chain
-
         if error_flag == True:
-            return render_template('second.html', messages = {'message1' : message , 'blockchain' : chain})
+            return render_template('second.html', messages = {'message1' : message , 'message2' : ' Use the "Add another file" button to enter the hash' , 'blockchain' : blockchain.chain})
         else:
-            return render_template('second.html',messages = {'message1' : message , 'message2' : "Path of the downloaded file " + file_path , 'blockchain' : chain})
+            return render_template('second.html',messages = {'message1' : message , 'message2' : "Path of the downloaded file : " + file_path , 'blockchain' : blockchain.chain})
 
 # # Replacing the chain by the longest chain if needed
 # @app.route('/replace_chain', methods = ['GET'])

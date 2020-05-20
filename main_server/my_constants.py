@@ -1,7 +1,7 @@
 from flask import Flask
 
-UPLOAD_FOLDER = 'F:/main_server/uploads'
-DOWNLOAD_FOLDER = 'F:/main_server/downloads'
+UPLOAD_FOLDER = '/Users/souviksaha/Desktop/IPFSUploads'
+DOWNLOAD_FOLDER = '/Users/souviksaha/Desktop/IPFSDownloads'
 app = Flask(__name__)
 app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER

@@ -1,95 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
 	<title>File Upload center</title>
+	<link rel="stylesheet" type="text/css" href="first.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="jquery-3.5.1.js">
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.js">
+</head>
 
-
-	<style>
-
-		body{
-		background-color: #95C6C8;
-		}
-
-		form {
-			padding: 2%;
-			margin: 18% auto;
-			width: 20%;
-			background-color: #f2f2f2;
-		}
-
-		input[type=submit] {
-		width: 60%;
-		background-color: #4CAF50;
-		color: white;
-		padding: 14px 20px;
-		margin: 1% 0%;
-		border: none;
-		border-radius: 4px;
-		cursor: pointer;
-		}
-
-	</style>
+<body>
 
 	<form method="post" action="/add_file" enctype="multipart/form-data">
-		<dl>
 
-			<h2>File sharing portal</h2>
+		<!-- <h2>File sharing portal</h2>
+		<label>Sender:</label>
+		<br>
+		<input type="text" name="sender_name">
+		<br>
 
-			<p>
+		<label>Receiver:</label>
+		<br>
+		<input type="text" name="receiver_name">
+		<br>
 
-				<label>
-					Sender:
-				</label>
+		<input type="file" name="file" autocomplete="off" required>
 
-				<br>
-				<input type="text" name="sender_name">
-				<br>
+		<input type="submit" value="Submit"> -->
 
-			</p>
+		<h3>File sharing portal</h3>
+		<br>
 
-			<p>
+		<div class="form-group">
+		    <label>Sender:</label>
+		    <input type="text" name="sender_name" class="form-control" placeholder="sender">
+		</div>
+		
+		<div class="form-group">
+		    <label>Receiver:</label>
+		    <input type="text" name="receiver_name"class="form-control" placeholder="receiver">
+		</div>
+		  
+		<div class="form-group">
+		    <label>File input:</label>
+		    <input type="file" name="file" autocomplete="off" required>
+		    <p class="help-block">Please choose a file to upload.</p>
+		</div>
 
-				<label>
-					Receiver:
-				</label>
+  		<button type="submit" class="btn btn-default">Submit</button>
 
-				<br>
-				<input type="text" name="receiver_name">
-				<br>
-
-			</p>
-
-			<p>
-
-				<input type="file" name="file" autocomplete="off" required>
-
-			</p>
-
-		</dl>
-
-		<p>
-			<input type="submit" value="Submit">
-		</p>
 	</form>
+
 
 	<form method="post" action="/retrieve_file" enctype="multipart/form-data">
-		<dl>
+		
+		<label>Enter file hash :</label>
+		<br>
+		<input type="text" name="file_hash">
+		<br>
 
-			<p>
-
-				<label>
-					Enter file hash :
-				</label>
-
-				<br>
-				<input type="text" name="file_hash">
-				<br>
-
-			</p>
-
-		</dl>
-
-		<p>
-			<input type="submit" value="Retrieve File">
-		</p>
+		<input type="submit" value="Retrieve File">
 		
 	</form>
+
+</body>
 </html>
+
+
