@@ -126,7 +126,7 @@ def retrieve_file():
             file_hash = request.form['file_hash']
             file_key = 'temp_kuch_bhi'
             # file_key = request.form['file_key']
-            file_path = retrieve_from_hash(file_hash)
+            file_path = retrieve_from_hash(file_hash, file_key)
             message = 'File successfully downloaded from infura'
 
         chain = blockchain.chain
