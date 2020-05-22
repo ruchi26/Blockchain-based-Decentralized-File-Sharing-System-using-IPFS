@@ -1,5 +1,5 @@
 body{
-    background-image: url('scenic-view-of-mountains-during-dawn-1261728.jpg');
+    background-image: url('website-background-blue-3.jpg');
 
     /* Full height */
     height: 100%; 
@@ -27,14 +27,14 @@ form{
     padding: 2%;
     margin-top: 30%;
     margin-bottom: 30%;
-    height: 40%;
+    /*height: 40%;*/
 }
 
 .retrieve-file-frm{
     padding: 2%;
-    margin-top: 38%;
-    margin-bottom: 38%;
-    height: 24%;
+    margin-top: 30%;
+    margin-bottom: 30%;
+    /*height: 40%;*/
 }
 
 .col-lg-6{

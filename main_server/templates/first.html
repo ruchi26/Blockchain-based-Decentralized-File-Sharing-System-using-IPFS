@@ -54,11 +54,18 @@
 				</label> -->
 
 				<div class="form-group">
+				  <label class="frm-text-design">Enter key :</label>
+				  <input type="password" name="file_key" class="form-control" placeholder="......">
+				</div>				
+
+				<div class="form-group">
 				  <label class="frm-text-design">File input :</label>
 				  <!-- <span class="input-group-addon" id="basic-addon1">@</span> -->
 				  <input type="file" name="file" class="form-control">
 				</div>
+				
 				<br>
+
 		  		<button type="submit" class="btn btn-primary">Submit</button>
 		  		
 			</form>
@@ -70,13 +77,21 @@
 			<form class="retrieve-file-frm" method="post" action="/retrieve_file" enctype="multipart/form-data">
 		
 				<h3 class="frm-text-design">Get a file !</h3>
+				
 				<br>
+
+				<div class="form-group">
+				  <label class="frm-text-design">Enter key :</label>
+				  <input type="password" name="file_key" class="form-control" placeholder="......">
+				</div>				
 
 				<div class="form-group">
 				    <label class="frm-text-design">Enter file hash :</label>
 				    <input type="text" name="file_hash" class="form-control" placeholder="Qm........">
 				</div>
+				
 				<br>
+
 				<button type="submit" class="btn btn-primary">Retreive file</button>
 		
 			</form>
