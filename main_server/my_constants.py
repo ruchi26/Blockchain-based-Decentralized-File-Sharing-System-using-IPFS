@@ -1,7 +1,11 @@
 from flask import Flask
 
-UPLOAD_FOLDER = 'F:/Blockchain-based-Decentralized-Storage-System/main_server/uploads'
-DOWNLOAD_FOLDER = 'F:/Blockchain-based-Decentralized-Storage-System/main_server/downloads'
+UPLOAD_FOLDER = '/Users/souviksaha/Desktop/IPFS users/IPFS_main_server/IPFSUploads'
+DOWNLOAD_FOLDER = '/Users/souviksaha/Desktop/IPFS users/IPFS_main_server/IPFSDownloads'
+
+# UPLOAD_FOLDER = 'F:/Blockchain-based-Decentralized-Storage-System/main_server/uploads'
+# DOWNLOAD_FOLDER = 'F:/Blockchain-based-Decentralized-Storage-System/main_server/downloads'
+
 app = Flask(__name__)
 app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
