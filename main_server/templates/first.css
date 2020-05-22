@@ -1,0 +1,49 @@
+body{
+    background-image: url('website-background-blue-3.jpg');
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.frm-text-design{
+    color: white;
+    font-family: 'Cinzel', serif;
+}
+
+form{
+    border-radius: 10px;
+    margin-left: 25%;
+    margin-right: 25%;
+    width: 50%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.add-file-frm{
+    padding: 2%;
+    margin-top: 30%;
+    margin-bottom: 30%;
+    /*height: 40%;*/
+}
+
+.retrieve-file-frm{
+    padding: 2%;
+    margin-top: 30%;
+    margin-bottom: 30%;
+    /*height: 40%;*/
+}
+
+.col-lg-6{
+    height: 100vh;
+}
+
+.btn-primary{
+    width: 100%;
+    /*background-color: ##000080 !important;
+    color: white !important;*/
+}
+
