@@ -38,7 +38,7 @@ def decrypt_file(file_path, file_key):
 def encrypt_file(file_path, file_key):
     pyAesCrypt.encryptFile(file_path, file_path + ".aes",  file_key, app.config['BUFFER_SIZE'])
 
-def hash_user_file(user_file):
+def hash_user_file(user_file, file_key):
     encrypt_file(user_file, file_key)
     encrypted_file_path = user_file + ".aes"
     client = ipfshttpclient.connect('/dns/ipfs.infura.io/tcp/5001/https')
@@ -46,7 +46,7 @@ def hash_user_file(user_file):
     file_hash = response['Hash']
     return file_hash
 
-def retrieve_from_hash(file_hash):
+def retrieve_from_hash(file_hash, file_key):
     client = ipfshttpclient.connect('/dns/ipfs.infura.io/tcp/5001/https')
     file_content = client.cat(file_hash)
     file_path = os.path.join(app.config['DOWNLOAD_FOLDER'], file_hash)
