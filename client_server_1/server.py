@@ -114,6 +114,14 @@ def add_file():
 
 @app.route('/retrieve_file', methods=['POST'])
 def retrieve_file():
+
+    is_chain_replaced = blockchain.replace_chain()
+
+    if is_chain_replaced:
+        print('The nodes had different chains so the chain was replaced by the longest one.')
+    else:
+        print('All good. The chain is the largest one.')
+
     if request.method == 'POST':
 
         error_flag = True

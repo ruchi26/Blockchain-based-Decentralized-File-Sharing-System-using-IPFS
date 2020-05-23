@@ -95,15 +95,8 @@ def add_file():
                 file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 user_file.save(file_path)
                 append_file_extension(user_file, file_path)
-<<<<<<< HEAD
                 file_key = 'temp_kuch_bhi'
                 # file_key = request.form['file_key']
-=======
-
-                # file_content = open(file_path, 'rb').read()
-
-                hashed_output1 = hash_user_file(file_path)
->>>>>>> front-end
                 sender = request.form['sender_name']
                 receiver = request.form['receiver_name']
                 hashed_output1 = hash_user_file(file_path, file_key)
@@ -120,6 +113,14 @@ def add_file():
 
 @app.route('/retrieve_file', methods=['POST'])
 def retrieve_file():
+
+    is_chain_replaced = blockchain.replace_chain()
+
+    if is_chain_replaced:
+        print('The nodes had different chains so the chain was replaced by the longest one.')
+    else:
+        print('All good. The chain is the largest one.')
+
     if request.method == 'POST':
 
         error_flag = True

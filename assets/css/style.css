@@ -785,6 +785,14 @@ section {
   color: #fff;
 }
 
+/*.contact .info .email{
+  margin-left: 40%;
+}
+
+.contact .info .phone{
+  margin-left: 40%;
+}*/
+
 .contact .info .email:hover i, .contact .info .address:hover i, .contact .info .phone:hover i {
   background: #16df7e;
   color: #fff;
