@@ -23,10 +23,11 @@ form{
     /*padding: 2%;*/
     margin-top: 8%;
     /*margin-bottom: 30%;*/
-    background-image: url('main-qimg-2f4400f744df9c5f28544b1d9844904a.png');
+    background-image: url('receive.png');
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
+    background-size: 450px;
     /*background-size: cover;*/
 }
 
