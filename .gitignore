@@ -1,5 +1,5 @@
-client_server_1\my_constants.py
-main_server\my_constants.py
-main_server\__pycache__
-client_server_1\__pycache__
+client_server_1/my_constants.py
+main_server/my_constants.py
+main_server/__pycache__
+client_server_1/__pycache__
 
