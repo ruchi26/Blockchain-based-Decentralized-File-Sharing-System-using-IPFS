@@ -26,6 +26,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
 }
 
+h1 {
+  padding: 20px;
+}
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -523,7 +527,11 @@ section {
 # Featured Services
 --------------------------------------------------------------*/
 .featured-services {
-  padding: 0;
+  padding: 60px;
+}
+
+.featured-services .columns {
+  padding: 25px;
 }
 
 .featured-services .icon-box {
@@ -531,7 +539,7 @@ section {
   color: #5f687b;
   background: #f9f9fa;
   border-radius: 4px;
-  border: 1px solid #f9f9fa;
+  border: 3px solid #f9f9fa;
   transition: 0.3s;
 }
 
@@ -571,16 +579,30 @@ section {
 /*--------------------------------------------------------------
 # About
 --------------------------------------------------------------*/
+.about {
+  padding-top: 20px;
+}
+
+.about .content {
+  padding-top: 20px;
+}
+
 .about .content h3 {
   font-weight: 700;
   font-size: 32px;
   color: #5f687b;
 }
 
-.about .content ul {
-  list-style: none;
-  padding: 0;
+.about .content h4 {
+  font-weight: 550;
+  color: #5f687b;
 }
+
+.about .content h5 {
+  font-weight: 500;
+  color: #5f687b;
+}
+
 
 .about .content ul li {
   padding-bottom: 10px;
@@ -594,6 +616,15 @@ section {
 
 .about .content p:last-child {
   margin-bottom: 0;
+}
+
+.about a {
+  color: #14c871;
+}
+
+.about a:hover {
+  color: #206bfb;
+  text-decoration: none;
 }
 
 /*--------------------------------------------------------------
