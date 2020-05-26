@@ -1,0 +1,79 @@
+body{
+    background-image: url('../img/Abstract-Background-White.jpg');
+    height: 100vh; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.frm-text-design{
+    color: white;
+    font-family: 'Cinzel', serif;
+}
+
+.send-form .send-image {
+    padding: 50px;
+    align-items: center;
+    margin-top: 20px;
+
+}
+
+.receive-form .receive-image {
+    padding: 50px;
+    align-items: center;
+    margin-top: 20px;
+
+}
+
+.animated {
+    animation: up-down 2s ease-in-out infinite alternate-reverse both;
+  }
+
+@-webkit-keyframes up-down {
+    0% {
+        transform: translateY(15px);
+    }
+    100% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes up-down {
+    0% {
+        transform: translateY(15px);
+    }
+    100% {
+        transform: translateY(-15px);
+    }
+}
+
+form{
+    border-radius: 10px;
+    margin-left: 25%;
+    margin-right: 25%;
+    width: 65%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.form-control{
+    padding: 4px;
+}
+
+.add-file-frm{
+    padding: 4%;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+.get-file-frm{
+    padding: 4%;
+    margin-top: 100px;
+    margin-bottom: 10px;
+}
+
+.btn-primary{
+    width: 100%;
+    /*background-color: ##000080 !important;
+    color: white !important;*/
+}
+
