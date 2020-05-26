@@ -532,6 +532,9 @@ section {
 
 .featured-services .columns {
   padding: 25px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .featured-services .icon-box {
@@ -541,21 +544,30 @@ section {
   border-radius: 4px;
   border: 3px solid #f9f9fa;
   transition: 0.3s;
+  align-items: center;
+  justify-content: center;
 }
 
 .featured-services .icon {
   margin: 0 0 15px 0;
+  text-align: center;
+}
+
+.featured-services .h4 {
+  text-align: center;
 }
 
 .featured-services .icon i {
   color: #16df7e;
   font-size: 36px;
+  text-align: center;
 }
 
 .featured-services .title {
   font-weight: 600;
   margin-bottom: 15px;
   font-size: 18px;
+  text-align: center;
 }
 
 .featured-services .title a {
@@ -628,28 +640,6 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Counts
---------------------------------------------------------------*/
-.counts {
-  padding-top: 0;
-}
-
-.counts .counters span {
-  font-size: 48px;
-  display: block;
-  color: #16df7e;
-  font-weight: 700;
-}
-
-.counts .counters p {
-  padding: 0;
-  margin: 0 0 20px 0;
-  font-family: "Raleway", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-/*--------------------------------------------------------------
 # Services
 --------------------------------------------------------------*/
 .services .icon-box {
@@ -662,7 +652,7 @@ section {
 
 .services .icon-box .icon {
   margin: 0 auto;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
