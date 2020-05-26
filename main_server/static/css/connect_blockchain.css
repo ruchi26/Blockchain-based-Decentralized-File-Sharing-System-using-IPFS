@@ -1,0 +1,54 @@
+/*--------------------------------------------------------------
+# Blockchain Services
+--------------------------------------------------------------*/
+.blockchain-services {
+    padding: 60px;
+  }
+  
+  .blockchain-services .columns {
+    padding: 25px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .blockchain-services .icon-box {
+    padding: 20px;
+    color: #5f687b;
+    background: #f9f9fa;
+    border-radius: 4px;
+    border: 3px solid #f9f9fa;
+    transition: 0.3s;
+  }
+  
+  .blockchain-services .icon {
+    margin: 0 0 15px 0;
+  }
+  
+  .blockchain-services .icon i {
+    color: #16df7e;
+    font-size: 36px;
+  }
+  
+  .blockchain-services .title {
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+  
+  .blockchain-services .title a {
+    color: #5f687b;
+    transition: 0.3s;
+  }
+  
+  .blockchain-services .icon-box:hover {
+    border-color: #eaecef;
+  }
+  
+  .blockchain-services .icon-box:hover .title a {
+    color: #16df7e;
+  }
+  
+  .blockchain-services .description {
+    line-height: 24px;
+    font-size: 14px;
+  }
