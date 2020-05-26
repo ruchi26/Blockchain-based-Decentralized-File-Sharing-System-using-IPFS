@@ -1,106 +1,73 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>File Upload center</title>
-	<link rel="stylesheet" type="text/css" href="static/css/first.css">
-	<link rel="stylesheet" type="text/css" href="static/vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="static/vendor/jquery/jquery-3.5.1.js">
-	<link rel="stylesheet" type="text/css" href="static/vendor/bootstrap/js/bootstrap.min.js">
-	<link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
-</head>
+	<head>
+		<title>File Upload center</title>
+		<link rel="stylesheet" type="text/css" href="static/css/first.css">
+		<link rel="stylesheet" type="text/css" href="static/vendor/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="static/vendor/jquery/jquery-3.5.1.js">
+		<link rel="stylesheet" type="text/css" href="static/vendor/bootstrap/js/bootstrap.min.js">
+		<link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+	</head>
 
-<body>
+	<body>
 
-	<div class="row">
-		<div class="col-lg-6">
+		<div class="row">
+			<div class="col-lg-6">
+				
+				<form class="add-file-frm" method="post" action="/add_file" enctype="multipart/form-data">
+
+					<h3 class="frm-text-design">Upload a file !</h3>
+					<br>
+
+					<div class="form-group">
+						<label class="frm-text-design">Sender :</label>
+						<input type="text" name="sender_name" class="form-control" placeholder="sender....">
+					</div>
+					
+					<div class="form-group">
+						<label class="frm-text-design">Receiver :</label>
+						<input type="text" name="receiver_name" class="form-control" placeholder="receiver....">
+					</div>
+
+					<div class="form-group">
+					<label class="frm-text-design">Enter key :</label>
+					<input type="password" name="file_key" class="form-control" placeholder="......">
+					</div>				
+
+					<div class="form-group">
+					<label class="frm-text-design">File input :</label>
+					<input type="file" name="file" class="form-control">
+					</div><br>
+
+					<button type="submit" class="btn btn-primary">Submit</button>
+					
+				</form>
+
+			</div>	
+
+			<div class="col-lg-6">
+				
+				<form class="retrieve-file-frm" method="post" action="/retrieve_file" enctype="multipart/form-data">
 			
-			<form class="add-file-frm" method="post" action="/add_file" enctype="multipart/form-data">
+					<h3 class="frm-text-design">Get a file !</h3>
+					
+					<br>
 
-				<!-- <h2>File sharing portal</h2>
-				<label>Sender:</label>
-				<br>
-				<input type="text" name="sender_name">
-				<br>
+					<div class="form-group">
+					<label class="frm-text-design">Enter key :</label>
+					<input type="password" name="file_key" class="form-control" placeholder="......">
+					</div>				
 
-				<label>Receiver:</label>
-				<br>
-				<input type="text" name="receiver_name">
-				<br>
-
-				<input type="file" name="file" autocomplete="off" required>
-
-				<input type="submit" value="Submit"> -->
-
-				<h3 class="frm-text-design">Upload a file !</h3>
-				<br>
-
-				<div class="form-group">
-				    <label class="frm-text-design">Sender :</label>
-				    <input type="text" name="sender_name" class="form-control" placeholder="sender....">
-				</div>
-				
-				<div class="form-group">
-				    <label class="frm-text-design">Receiver :</label>
-				    <input type="text" name="receiver_name" class="form-control" placeholder="receiver....">
-				</div>
-				  
-				<!-- <div class="form-group">
-				    <label class="frm-text-design">File input :</label>
-				    <input type="file" name="file" autocomplete="off" required>
-				</div> -->
-
-				<!-- <label class="btn btn-default btn-file form-group input-group">
-    				Browse <input type="file" style="display: none;">
-				</label> -->
-
-				<div class="form-group">
-				  <label class="frm-text-design">Enter key :</label>
-				  <input type="password" name="file_key" class="form-control" placeholder="......">
-				</div>				
-
-				<div class="form-group">
-				  <label class="frm-text-design">File input :</label>
-				  <!-- <span class="input-group-addon" id="basic-addon1">@</span> -->
-				  <input type="file" name="file" class="form-control">
-				</div>
-				
-				<br>
-
-		  		<button type="submit" class="btn btn-primary">Submit</button>
-		  		
-			</form>
-
-		</div>	
-
-		<div class="col-lg-6">
+					<div class="form-group">
+						<label class="frm-text-design">Enter file hash :</label>
+						<input type="text" name="file_hash" class="form-control" placeholder="Qm........">
+					</div><br>	
+					
+					<button type="submit" class="btn btn-primary">Retreive file</button>
 			
-			<form class="retrieve-file-frm" method="post" action="/retrieve_file" enctype="multipart/form-data">
-		
-				<h3 class="frm-text-design">Get a file !</h3>
-				
-				<br>
-
-				<div class="form-group">
-				  <label class="frm-text-design">Enter key :</label>
-				  <input type="password" name="file_key" class="form-control" placeholder="......">
-				</div>				
-
-				<div class="form-group">
-				    <label class="frm-text-design">Enter file hash :</label>
-				    <input type="text" name="file_hash" class="form-control" placeholder="Qm........">
-				</div>
-				
-				<br>
-
-				<button type="submit" class="btn btn-primary">Retreive file</button>
-		
-			</form>
-
+				</form>
+			</div>
 		</div>
-	</div>
-
-
-</body>
+	</body>
 </html>
 
 
