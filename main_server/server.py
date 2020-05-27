@@ -16,8 +16,6 @@ import requests
 # 'request' package is used in the 'add_file' function for multiple actions.
 
 socketio = SocketIO(app)
-
-
 blockchain = Blockchain()
 
 def allowed_file(filename):
@@ -69,7 +67,21 @@ def index():
 
 @app.route('/home')
 def home():
-    return render_template('first.html')
+    return render_template('index.html')
+
+@app.route('/upload')
+def upload():
+    return render_template('upload.html')
+
+@app.route('/download')
+def download():
+    return render_template('download.html')
+
+@app.route('/connect_blockchain')
+def connect_blockchain():
+    return render_template('connect_blockchain.html', messages = {'message1' : "Welcome to the services page",
+                                                                  'message2' : "Congratulations , you are now connected to the blockchain.",
+                                                                 } , chain = blockchain.chain)
 
 @app.route('/add_file', methods=['POST'])
 def add_file():
@@ -109,7 +121,9 @@ def add_file():
         if error_flag == True:
             return render_template('first.html')
         else:
-            return render_template('second.html', messages = {'message1' : message , 'message2' : "Path of the uploaded file : " + file_path , 'blockchain' : blockchain.chain})
+            return render_template('connect_blockchain.html', messages = {'message1' : message,
+                                                              'message2' : "Path of the uploaded file : " + file_path, 
+                                                             } , chain = blockchain.chain)
 
 @app.route('/retrieve_file', methods=['POST'])
 def retrieve_file():
@@ -136,9 +150,13 @@ def retrieve_file():
             message = 'File successfully downloaded from infura'
 
         if error_flag == True:
-            return render_template('second.html', messages = {'message1' : message , 'message2' : ' Use the "Add another file" button to enter the hash' , 'blockchain' : blockchain.chain})
+            return render_template('connect_blockchain.html', messages = {'message1' : message,
+                                                              'message2' : ' Use the "Add another file" button to enter the hash',
+                                                             } , chain = blockchain.chain)
         else:
-            return render_template('second.html',messages = {'message1' : message , 'message2' : "Path of the downloaded file : " + file_path , 'blockchain' : blockchain.chain})
+            return render_template('connect_blockchain.html', messages = {'message1' : message,
+                                                              'message2' : "Path of the uploaded file : " + file_path, 
+                                                             } , chain = blockchain.chain)
 
 # Getting the full Blockchain
 @app.route('/get_chain', methods = ['GET'])
