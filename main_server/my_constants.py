@@ -1,7 +1,7 @@
 from flask import Flask
 
-UPLOAD_FOLDER = '/Users/souviksaha/Desktop/IPFS users/IPFS_main_server/IPFSUploads'
-DOWNLOAD_FOLDER = '/Users/souviksaha/Desktop/IPFS users/IPFS_main_server/IPFSDownloads'
+UPLOAD_FOLDER = '/Users/souviksaha/Desktop/Blockchain-based-Decentralized-Storage-System/main_server/uploads'
+DOWNLOAD_FOLDER = '/Users/souviksaha/Blockchain-based-Decentralized-Storage-System/main_server/downloads'
 
 # UPLOAD_FOLDER = 'F:/Blockchain-based-Decentralized-Storage-System/main_server/uploads'
 # DOWNLOAD_FOLDER = 'F:/Blockchain-based-Decentralized-Storage-System/main_server/downloads'

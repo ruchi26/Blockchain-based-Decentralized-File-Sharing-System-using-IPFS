@@ -80,11 +80,11 @@ def upload():
 def download():
     return render_template('download.html')
 
-@app.route('/connect_blockchain')
-def connect_blockchain():
-    return render_template('connect_blockchain.html', messages = {'message1' : "Welcome to the services page",
-                                                                  'message2' : "Congratulations , you are now connected to the blockchain.",
-                                                                 } , chain = blockchain.chain)
+# @app.route('/connect_blockchain')
+# def connect_blockchain():
+#     return render_template('connect_blockchain.html', messages = {'message1' : "Welcome to the services page",
+#                                                                   'message2' : "Congratulations , you are now connected to the blockchain.",
+#                                                                  } , chain = blockchain.chain)
 
 @app.route('/add_file', methods=['POST'])
 def add_file():
@@ -180,14 +180,16 @@ def my_response(message):
     print(pickle.loads(message['data']))
     blockchain.nodes = pickle.loads(message['data'])
 
-@app.route("/connect_to_blockchain", methods=["GET"])
-def connect_to_blockchain():
+@app.route('/connect_blockchain')
+def connect_blockchain():
 
     sio.connect('http://'+app.config['SERVER_IP'])
     sio.emit('add_client_node', 
             {'node_address' : client_ip['Host'] + ':' + str(client_ip['Port'])}
             )
-    return render_template('first.html')
+    return render_template('connect_blockchain.html', messages = {'message1' : "Welcome to the services page",
+                                                                  'message2' : "Congratulations , you are now connected to the blockchain.",
+                                                                 } , chain = blockchain.chain)
 
 if __name__ == '__main__':
     app.run(host = client_ip['Host'], port= client_ip['Port'])
