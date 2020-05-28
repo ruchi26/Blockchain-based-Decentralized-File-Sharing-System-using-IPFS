@@ -146,7 +146,7 @@ def retrieve_file():
             file_key = 'temp_kuch_bhi'
             file_key = request.form['file_key']
             file_path = retrieve_from_hash(file_hash, file_key)
-            message = 'File successfully downloaded from infura'
+            message = 'File successfully downloaded'
 
         if error_flag == True:
             return render_template('connect_blockchain.html', messages = {'message1' : message,
@@ -175,6 +175,13 @@ def handle_node(client_node):
     blockchain.nodes.add(client_node['node_address'])
     emit('my_response', {'data': pickle.dumps(blockchain.nodes)}, broadcast = True)
 
+@socketio.on('remove_client_node')
+def handle_node(client_node):
+    print(client_node)
+    blockchain.nodes.remove(client_node['node_address'])
+    print("yo its here")
+    print(blockchain.nodes)
+    emit('my_response', {'data': pickle.dumps(blockchain.nodes)}, broadcast = True)
 
 @socketio.on('disconnect')
 def handle_disconnect():

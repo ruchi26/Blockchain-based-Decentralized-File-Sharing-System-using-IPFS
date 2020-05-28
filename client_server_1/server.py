@@ -80,12 +80,6 @@ def upload():
 def download():
     return render_template('download.html')
 
-# @app.route('/connect_blockchain')
-# def connect_blockchain():
-#     return render_template('connect_blockchain.html', messages = {'message1' : "Welcome to the services page",
-#                                                                   'message2' : "Congratulations , you are now connected to the blockchain.",
-#                                                                  } , chain = blockchain.chain)
-
 @app.route('/add_file', methods=['POST'])
 def add_file():
     
@@ -189,6 +183,14 @@ def connect_blockchain():
     return render_template('connect_blockchain.html', messages = {'message1' : "Welcome to the services page",
                                                                   'message2' : "Congratulations , you are now connected to the blockchain.",
                                                                  } , chain = blockchain.chain)
+
+@app.route('/disconnect_blockchain')
+def disconnect_blockchain():
+    sio.emit('remove_client_node', 
+            {'node_address' : client_ip['Host'] + ':' + str(client_ip['Port'])}
+            )
+    sio.disconnect()
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(host = client_ip['Host'], port= client_ip['Port'])
