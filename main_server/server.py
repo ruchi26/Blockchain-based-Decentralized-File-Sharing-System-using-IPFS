@@ -81,7 +81,7 @@ def download():
 def connect_blockchain():
     return render_template('connect_blockchain.html', messages = {'message1' : "Welcome to the services page",
                                                                   'message2' : "Congratulations , you are now connected to the blockchain.",
-                                                                 } , chain = blockchain.chain)
+                                                                 } , chain = blockchain.chain, nodes = len(blockchain.nodes))
 
 @app.route('/add_file', methods=['POST'])
 def add_file():
@@ -122,7 +122,7 @@ def add_file():
         else:
             return render_template('connect_blockchain.html', messages = {'message1' : message,
                                                               'message2' : "Path of the uploaded file : " + file_path, 
-                                                             } , chain = blockchain.chain)
+                                                             } , chain = blockchain.chain, nodes = len(blockchain.nodes))
 
 @app.route('/retrieve_file', methods=['POST'])
 def retrieve_file():
@@ -151,11 +151,11 @@ def retrieve_file():
         if error_flag == True:
             return render_template('connect_blockchain.html', messages = {'message1' : message,
                                                               'message2' : ' Use the "Add another file" button to enter the hash',
-                                                             } , chain = blockchain.chain)
+                                                             } , chain = blockchain.chain, nodes = len(blockchain.nodes))
         else:
             return render_template('connect_blockchain.html', messages = {'message1' : message,
                                                               'message2' : "Path of the uploaded file : " + file_path, 
-                                                             } , chain = blockchain.chain)
+                                                             } , chain = blockchain.chain, nodes = len(blockchain.nodes))
 
 # Getting the full Blockchain
 @app.route('/get_chain', methods = ['GET'])
@@ -179,8 +179,6 @@ def handle_node(client_node):
 def handle_node(client_node):
     print(client_node)
     blockchain.nodes.remove(client_node['node_address'])
-    print("yo its here")
-    print(blockchain.nodes)
     emit('my_response', {'data': pickle.dumps(blockchain.nodes)}, broadcast = True)
 
 @socketio.on('disconnect')

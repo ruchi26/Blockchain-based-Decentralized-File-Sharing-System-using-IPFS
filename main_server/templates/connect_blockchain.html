@@ -35,6 +35,7 @@
     </div>
   </header><!-- End Header -->
 
+  <!-- ======= Blockchain-Services Section ======= -->
   <section id="blockchain-services" class="blockchain-services">
     <div class="container">
       <div class="row">
@@ -67,7 +68,28 @@
         </div>
       </div>
     </div>
-  </section>
+  </section><!-- End Blockchain-Services Section -->
+
+  <!-- ======= Counts Section ======= -->
+  <section id="counts" class="counts">
+    <div class="container">
+
+      <div class="row counters">
+
+        <div class="col-6 text-center">
+          <span data-toggle="counter-up">{{nodes}}</span>
+          <p>Total Connected Nodes</p>
+        </div>
+
+        <div class="col-6 text-center">
+          <span data-toggle="counter-up">{{chain|length}}</span>
+          <p>Total Blocks</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End Counts Section -->
 
   <div class="container">
 
@@ -75,16 +97,20 @@
     <br><br>
     {{messages['message2']}}
     <br><br>
+    {% if chain|length == 1%}
+    The Genesis Block is displayed below:
+    {% else %}
     The Blockchain is displayed below:
+    {% endif %}
     <br><br>
     <!-- {{messages['blockchain']}} -->
 
 
     <div class="card">
       
-      {% for x in chain %}
+      {% for x in chain|reverse %}
         <div class="card-body">
-          <h4 class="card-title"> Block {{ x.index }} </h4>
+          <h4 class="card-title"> Block {{ x.index-1 }} </h4>
         </div>
 
         <ul class="list-group list-group-flush">
