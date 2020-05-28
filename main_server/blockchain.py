@@ -1,4 +1,5 @@
-import datetime
+#import datetime
+import time
 import hashlib
 import json
 from flask import Flask, jsonify, request
@@ -20,7 +21,7 @@ class Blockchain:
     
     def create_block(self, proof, previous_hash, sender, receiver, file_hash):
         block = {'index': len(self.chain) + 1,
-                 'timestamp': str(datetime.datetime.now()),
+                 'timestamp': str(time.strftime("%d %B %Y , %I:%M:%S %p", time.localtime())),  # d-date, B-Month, Y-Year ,I-Hours in 12hr format, M-Minutes, S-secnods, p-A.M or P.M
                  'proof': proof,
                  'previous_hash': previous_hash,
                  'sender': sender, #########
