@@ -91,10 +91,9 @@
           <li class="list-group-item">Timestamp :  {{ x.timestamp }}</li>
           <li class="list-group-item">Proof :  {{ x.proof }}</li>
           <li class="list-group-item">Previous hash :  {{ x.previous_hash }}</li>
-          <li class="list-group-item">
-            Shared files :<br>
-            {{ x.shared_files }}
-          </li>      
+          <li class="list-group-item">Sender : {{ x.sender }}</li>
+          <li class="list-group-item">Receiver : {{ x.receiver }}</li>
+          <li class="list-group-item">Shared file : {{ x.shared_files }}</li>               
         </ul>
         
       {% endfor %}
