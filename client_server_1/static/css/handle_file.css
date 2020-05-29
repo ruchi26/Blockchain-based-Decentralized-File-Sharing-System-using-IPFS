@@ -1,15 +1,14 @@
 .file-frm{
     margin-left: 35%;
     margin-right: 35%;
-    margin-top: 11%;
-    margin-bottom: 11%;
+    margin-top: 4%;
     border: 1px solid #14c871;
     border-radius: 10px;
-    padding-left: 90px;
-    padding-right: 90px;
+    padding-left: 80px;
+    padding-right: 80px;
     padding-top: 50px;
     padding-bottom: 50px;
-    font-family: 'Raleway', sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 .send-btn{
@@ -31,15 +30,10 @@
     border-color: #206bfb;
 }
 
-/*.file-input input{
-    margin-left: 20%;
-    margin-right: 15%;
-}*/
-
 h3{
-    font-family: 'Raleway', sans-serif;
+    font-family: "Open Sans", sans-serif;
     color: #444444;
     text-align: center;
-    letter-spacing: 2px;
+    /* letter-spacing: 2px; */
     text-transform: uppercase;
 }

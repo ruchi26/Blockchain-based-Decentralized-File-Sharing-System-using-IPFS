@@ -112,7 +112,7 @@ def add_file():
                 file_key = request.form['file_key']
                 hashed_output1 = hash_user_file(file_path, file_key)
                 index = blockchain.add_file(sender, receiver, hashed_output1)
-                message = f'File successfully uploaded to Infura. This file will be added to Block {index-1}'
+                message = f'File successfully uploaded. It will be added to Block {index-1}'
                 error_flag = False
             else:
                 message = 'Allowed file types are txt, pdf, png, jpg, jpeg, gif'

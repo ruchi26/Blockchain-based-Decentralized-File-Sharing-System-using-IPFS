@@ -78,7 +78,19 @@
 /*----------------------------------------------------------------
 # Design the block
 ------------------------------------------------------------------*/
+.card-header {
+  background-color: #e0fff1;
+}
+
+.card-body {
+  padding: 0px;
+}
 
 .card-body .prev-hash{
   color: yellow !important;
+}
+
+.card .h4{
+  border: 1px;
+  color: #008000;
 }

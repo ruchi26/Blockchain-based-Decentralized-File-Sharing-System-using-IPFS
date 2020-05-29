@@ -105,34 +105,28 @@
     <br><br>
     <!-- {{messages['blockchain']}} -->
 
-
-    <div class="card">
-      
-      {% for x in chain|reverse %}
-        <div class="card-body">
-          <h4 class="card-title"> Block {{ x.index-1 }} </h4>
-        </div>
-
+    {% for x in chain|reverse %}
+    <div class="card"> 
+      <div class="card-header">
+        <h4><b>Block {{ x.index-1 }}</b></h4>
+      </div>
+      <div class="card-body">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            Timestamp :  {{ x.timestamp }}
+            <b>Timestamp</b> :  {{ x.timestamp }}
           </li>
-          <li class="list-group-item">Proof :  {{ x.proof }}</li>
+          <li class="list-group-item"><b>Proof</b> :  {{ x.proof }}</li>
           <li class="list-group-item text-danger">
-            Previous hash :  {{ x.previous_hash }}
+            <b>Previous hash</b> :  {{ x.previous_hash }}
           </li>
-          <li class="list-group-item">Sender : {{ x.sender }}</li>
-          <li class="list-group-item">Receiver : {{ x.receiver }}</li>
-          <li class="list-group-item text text-primary">Shared file : {{ x.shared_files }}</li>               
+          <li class="list-group-item"><b>Sender</b> : {{ x.sender }}</li>
+          <li class="list-group-item"><b>Receiver</b> : {{ x.receiver }}</li>
+          <li class="list-group-item text text-primary"><b>Shared file</b> : {{ x.shared_files }}</li>               
         </ul>
-        
-      {% endfor %}
-      
-      <br><br>
-    </div>    
-
+      </div>   
+    </div>
     <br>
-
+    {% endfor %} 
   </div>
   <br>
   <br>
