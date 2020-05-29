@@ -112,7 +112,7 @@ def add_file():
                 receiver = request.form['receiver_name']
                 hashed_output1 = hash_user_file(file_path, file_key)
                 index = blockchain.add_file(sender, receiver, hashed_output1)
-                message = f'File successfully uploaded to Infura. This file will be added to Block {index}'
+                message = f'File successfully uploaded to Infura. This file will be added to Block {index-1}'
                 error_flag = False
             else:
                 message = 'Allowed file types are txt, pdf, png, jpg, jpeg, gif'
@@ -143,7 +143,6 @@ def retrieve_file():
         else:
             error_flag = False
             file_hash = request.form['file_hash']
-            file_key = 'temp_kuch_bhi'
             file_key = request.form['file_key']
             file_path = retrieve_from_hash(file_hash, file_key)
             message = 'File successfully downloaded'
