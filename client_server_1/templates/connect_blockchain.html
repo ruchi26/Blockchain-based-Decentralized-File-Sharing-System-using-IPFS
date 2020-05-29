@@ -35,6 +35,7 @@
     </div>
   </header><!-- End Header -->
 
+  <!-- ======= Blockchain-Services Section ======= -->
   <section id="blockchain-services" class="blockchain-services">
     <div class="container">
       <div class="row">
@@ -59,7 +60,7 @@
         <div class="columns col-md-4">
           <div class="icon-box">
             <div class="icon"><i class="icofont-computer"></i></div>
-            <h4 class="title"><a href="{{ url_for('disconnect_blockchain') }}">Disconnect</a></h4>
+            <h4 class="title"><a href="{{ url_for('home') }}">Disconnect</a></h4>
             <p class="description">
               Disconnect from the blockchain. To get access to the blockchain, connect to the blockchain again
             </p>
@@ -96,7 +97,7 @@
     <br><br>
     {{messages['message2']}}
     <br><br>
-    {% if chain|length == 1%}
+    {% if chain|length == 1 %}
     The Genesis Block is displayed below:
     {% else %}
     The Blockchain is displayed below:
@@ -113,24 +114,24 @@
         </div>
 
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Timestamp :  {{ x.timestamp }}</li>
+          <li class="list-group-item">
+            Timestamp :  {{ x.timestamp }}
+          </li>
           <li class="list-group-item">Proof :  {{ x.proof }}</li>
-          <li class="list-group-item">Previous hash :  {{ x.previous_hash }}</li>
+          <li class="list-group-item text-danger">
+            Previous hash :  {{ x.previous_hash }}
+          </li>
           <li class="list-group-item">Sender : {{ x.sender }}</li>
           <li class="list-group-item">Receiver : {{ x.receiver }}</li>
-          <li class="list-group-item">Shared file : {{ x.shared_files }}</li>               
+          <li class="list-group-item text text-primary">Shared file : {{ x.shared_files }}</li>               
         </ul>
         
       {% endfor %}
-
-    </div>
+      
+      <br><br>
+    </div>    
 
     <br>
-    <!-- <form action="/home">
-
-      <input type="submit" value="Add another file">
-
-    </form> -->
 
   </div>
   <br>
