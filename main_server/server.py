@@ -107,9 +107,9 @@ def add_file():
                 file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 user_file.save(file_path)
                 append_file_extension(user_file, file_path)
-                file_key = request.form['file_key']
                 sender = request.form['sender_name']
                 receiver = request.form['receiver_name']
+                file_key = request.form['file_key']
                 hashed_output1 = hash_user_file(file_path, file_key)
                 index = blockchain.add_file(sender, receiver, hashed_output1)
                 message = f'File successfully uploaded to Infura. This file will be added to Block {index-1}'
@@ -142,8 +142,8 @@ def retrieve_file():
             message = 'No hash entered.'
         else:
             error_flag = False
-            file_hash = request.form['file_hash']
             file_key = request.form['file_key']
+            file_hash = request.form['file_hash']
             file_path = retrieve_from_hash(file_hash, file_key)
             message = 'File successfully downloaded'
 

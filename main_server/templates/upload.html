@@ -1,55 +1,50 @@
 <!DOCTYPE html>
-	<head>
-		<title>ADD FILE</title>
-		<link rel="stylesheet" type="text/css" href="static/css/handle_file.css">
-		<link rel="stylesheet" type="text/css" href="static/vendor/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="static/vendor/jquery/jquery-3.5.1.js">
-		<link rel="stylesheet" type="text/css" href="static/vendor/bootstrap/js/bootstrap.min.js">
-		<link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
-	</head>
+<head>
+	<title>ADD FILE</title>
+	<link rel="stylesheet" href="static/css/handle_file.css">
+	<link href="static/css/style.css" rel="stylesheet">
+  	<link href="static/css/connect_blockchain.css" rel="stylesheet">
+	<link rel="stylesheet" href="static/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="static/vendor/jquery/jquery-3.5.1.js">
+	<link rel="stylesheet" href="static/vendor/bootstrap/js/bootstrap.min.js">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap">
+	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
 
-	<body>
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 order-2 order-lg-1 send-image">
-					<img src="static/img/send.png" class="img-fluid animated" alt="">
-				</div>
-				<div class="col-lg-6 pt-5 pt-lg-0 order-1 order-lg-2 send-form">
-					<form class="add-file-frm" method="post" action="/add_file" enctype="multipart/form-data">
+<body>
+		
+	<form class="file-frm" method="post" action="/add_file" enctype="multipart/form-data">
 
+		<h3>Upload a file </h3>
+		<br><br>
 
-						<h3 class="frm-text-design">Upload a file </h3>
-						<br>
-
-						<div class="form-group">
-							<label class="frm-text-design">Sender :</label>
-							<input type="text" name="sender_name" class="form-control">
-						</div>
-						
-						<div class="form-group">
-							<label class="frm-text-design">Receiver :</label>
-							<input type="text" name="receiver_name" class="form-control">
-						</div>
-							
-
-						<div class="form-group">
-							<label class="frm-text-design">Enter key :</label>
-							<input type="password" name="file_key" class="form-control">
-						</div>				
-
-						<div class="form-group">
-							<label class="frm-text-design">File input :</label>
-							<input type="file" name="file" class="form-control">
-						</div>
-						
-						<br>
-
-							<button type="submit" class="btn btn-primary">Submit</button>	  		
-					</form>
-				</div>
-			</div>
+		<div class="form-group">
+			<label>Sender :</label>
+			<input type="text" name="sender_name" class="form-control" placeholder="Sender name. . . .">
 		</div>
-	</body>
+		
+		<div class="form-group">
+			<label>Receiver :</label>
+			<input type="text" name="receiver_name" class="form-control" placeholder="Receiver name. . . .">
+		</div>
+			
+
+		<div class="form-group">
+			<label>Enter key :</label>
+			<input type="text" name="file_key" class="form-control" placeholder="Your personal key. . . .">
+		</div>				
+		<br>
+		<div class="form-group file-input">
+			<input type="file" name="file" class="">
+		</div>
+		
+		<br>
+
+		<button type="submit" class="send-btn">Submit</button>	  		
+	</form>
+	
+</body>
 </html>
 
 

@@ -1,79 +1,45 @@
-body{
-    background-image: url('../img/Abstract-Background-White.jpg');
-    height: 100vh; 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.frm-text-design{
-    color: white;
-    font-family: 'Cinzel', serif;
-}
-
-.send-form .send-image {
-    padding: 50px;
-    align-items: center;
-    margin-top: 20px;
-
-}
-
-.receive-form .receive-image {
-    padding: 50px;
-    align-items: center;
-    margin-top: 20px;
-
-}
-
-.animated {
-    animation: up-down 2s ease-in-out infinite alternate-reverse both;
-  }
-
-@-webkit-keyframes up-down {
-    0% {
-        transform: translateY(15px);
-    }
-    100% {
-        transform: translateY(-15px);
-    }
-}
-
-@keyframes up-down {
-    0% {
-        transform: translateY(15px);
-    }
-    100% {
-        transform: translateY(-15px);
-    }
-}
-
-form{
+.file-frm{
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-top: 11%;
+    margin-bottom: 11%;
+    border: 1px solid #14c871;
     border-radius: 10px;
-    margin-left: 25%;
-    margin-right: 25%;
-    width: 65%;
-    background-color: rgba(0,0,0,0.5);
+    padding-left: 90px;
+    padding-right: 90px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-family: 'Raleway', sans-serif;
 }
 
-.form-control{
-    padding: 4px;
-}
-
-.add-file-frm{
-    padding: 4%;
-    margin-top: 40px;
-    margin-bottom: 10px;
-}
-
-.get-file-frm{
-    padding: 4%;
-    margin-top: 100px;
-    margin-bottom: 10px;
-}
-
-.btn-primary{
+.send-btn{
     width: 100%;
-    /*background-color: ##000080 !important;
-    color: white !important;*/
+    background-color: #14c871;
+    color: white;
+    border-radius: 4px;
+    padding: 8px 25px;
+    white-space: nowrap;
+    transition: 0.3s;
+    font-size: 14px;
+    display: inline-block;
+    border: 1px solid #cdd1d9;
 }
 
+.send-btn:hover {
+    background: #206bfb;
+    color: #fff;
+    border-color: #206bfb;
+}
+
+/*.file-input input{
+    margin-left: 20%;
+    margin-right: 15%;
+}*/
+
+h3{
+    font-family: 'Raleway', sans-serif;
+    color: #444444;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
