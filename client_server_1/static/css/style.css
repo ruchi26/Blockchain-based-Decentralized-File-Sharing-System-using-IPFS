@@ -527,7 +527,10 @@ section {
 # Featured Services
 --------------------------------------------------------------*/
 .featured-services {
-  padding: 60px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  padding-left: 60px;
+  padding-right: 60px; 
 }
 
 .featured-services .columns {

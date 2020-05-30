@@ -2,7 +2,10 @@
 # Blockchain Services
 --------------------------------------------------------------*/
 .blockchain-services {
-  padding: 60px;
+  padding-top: 0px;
+  padding-bottom: 15px;
+  padding-right: 60px;
+  padding-left: 60px;
 }
 
 .blockchain-services .columns {
@@ -58,6 +61,7 @@
 --------------------------------------------------------------*/
 .counts {
   padding-top: 0;
+  padding-bottom: 15px;
 }
 
 .counts .counters span {

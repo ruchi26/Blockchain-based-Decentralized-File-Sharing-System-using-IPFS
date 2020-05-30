@@ -79,6 +79,7 @@ def download():
 
 @app.route('/connect_blockchain')
 def connect_blockchain():
+    is_chain_replaced = blockchain.replace_chain()
     return render_template('connect_blockchain.html', messages = {'message1' : "Welcome to the services page",
                                                                   'message2' : "Congratulations , you are now connected to the blockchain.",
                                                                  } , chain = blockchain.chain, nodes = len(blockchain.nodes))
@@ -112,7 +113,8 @@ def add_file():
                 file_key = request.form['file_key']
                 hashed_output1 = hash_user_file(file_path, file_key)
                 index = blockchain.add_file(sender, receiver, hashed_output1)
-                message = f'File successfully uploaded. It will be added to Block {index-1}'
+                message = f'File successfully uploaded'
+                message2 =  f'It will be added to Block {index-1}'
                 error_flag = False
             else:
                 message = 'Allowed file types are txt, pdf, png, jpg, jpeg, gif'
@@ -121,7 +123,7 @@ def add_file():
             return render_template('upload.html')
         else:
             return render_template('connect_blockchain.html', messages = {'message1' : message,
-                                                              'message2' : "Path of the uploaded file : " + file_path, 
+                                                              'message2' : message2, 
                                                              } , chain = blockchain.chain, nodes = len(blockchain.nodes))
 
 @app.route('/retrieve_file', methods=['POST'])
@@ -139,7 +141,9 @@ def retrieve_file():
         error_flag = True
 
         if request.form['file_hash'] == '':
-            message = 'No hash entered.'
+            message = 'No file hash entered.'
+        elif request.form['file_key'] == '':
+            message = 'No file key entered.'
         else:
             error_flag = False
             file_key = request.form['file_key']
@@ -148,8 +152,8 @@ def retrieve_file():
             message = 'File successfully downloaded'
 
         if error_flag == True:
-            return render_template('connect_blockchain.html', messages = {'message1' : message,
-                                                              'message2' : ' Use the "Add another file" button to enter the hash',
+            return render_template('download.html', messages = {'message1' : message,
+                                                              'message2' : 'Enter the correct file hash and the key to download the file ',
                                                              } , chain = blockchain.chain, nodes = len(blockchain.nodes))
         else:
             return render_template('connect_blockchain.html', messages = {'message1' : message,

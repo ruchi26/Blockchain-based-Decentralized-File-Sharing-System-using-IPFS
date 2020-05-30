@@ -35,6 +35,20 @@
     </div>
   </header><!-- End Header -->
 
+  <br><br>
+  <br><br>
+  
+  <div class="container">
+    <div class="alert alert-custom  fade in alert-dismissable show">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">×</span>
+      </button>
+      {{messages['message1']}}
+      <br><br>
+      {{messages['message2']}}
+      <br>
+    </div>
+  </div>
   <!-- ======= Blockchain-Services Section ======= -->
   <section id="blockchain-services" class="blockchain-services">
     <div class="container">
@@ -78,12 +92,12 @@
 
         <div class="col-6 text-center">
           <span data-toggle="counter-up">{{nodes}}</span>
-          <p>Total Connected Nodes</p>
+          <p>Total Connected Node(s)</p>
         </div>
 
         <div class="col-6 text-center">
           <span data-toggle="counter-up">{{chain|length}}</span>
-          <p>Total Blocks</p>
+          <p>Total Block(s)</p>
         </div>
 
       </div>
@@ -92,19 +106,6 @@
   </section><!-- End Counts Section -->
 
   <div class="container">
-
-    <div class="alert alert-custom  fade in alert-dismissable show">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-         <span aria-hidden="true">×</span>
-      </button>
-      {{messages['message1']}}
-      <br><br>
-      {{messages['message2']}}
-      <br>
-    </div>
-
-    <br>
-
     {% if chain|length == 1 %}
     The Genesis Block is displayed below:
     {% else %}
