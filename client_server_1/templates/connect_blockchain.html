@@ -93,10 +93,18 @@
 
   <div class="container">
 
-    {{messages['message1']}}
-    <br><br>
-    {{messages['message2']}}
-    <br><br>
+    <div class="alert alert-custom  fade in alert-dismissable show">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">×</span>
+      </button>
+      {{messages['message1']}}
+      <br><br>
+      {{messages['message2']}}
+      <br>
+    </div>
+
+    <br>
+
     {% if chain|length == 1 %}
     The Genesis Block is displayed below:
     {% else %}

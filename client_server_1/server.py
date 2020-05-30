@@ -115,7 +115,7 @@ def add_file():
                 message = 'Allowed file types are txt, pdf, png, jpg, jpeg, gif'
     
         if error_flag == True:
-            return render_template('first.html')
+            return render_template('upload.html')
         else:
             return render_template('connect_blockchain.html', messages = {'message1' : message,
                                                               'message2' : "Path of the uploaded file : " + file_path, 
