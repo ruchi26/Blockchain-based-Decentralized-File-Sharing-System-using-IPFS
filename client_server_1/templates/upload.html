@@ -13,36 +13,40 @@
 
 <body>
 		
-	<form class="file-frm" method="post" action="/add_file" enctype="multipart/form-data">
+	<div class="grandParentContaniner">
+		<div class="parentContainer">
+			<form class="file-frm" method="post" action="/add_file" enctype="multipart/form-data">
 
-		<h3>Upload a file </h3>
-		<br><br>
+				<h3>Upload a file </h3>
+				<br><br>
 
-		<div class="form-group">
-			<label>Sender :</label>
-			<input type="text" name="sender_name" class="form-control" placeholder="Sender name">
+				<div class="form-group">
+					<label>Sender :</label>
+					<input type="text" name="sender_name" class="form-control" placeholder="Sender name">
+				</div>
+				
+				<div class="form-group">
+					<label>Receiver :</label>
+					<input type="text" name="receiver_name" class="form-control" placeholder="Receiver name">
+				</div>
+					
+
+				<div class="form-group">
+					<label>Enter key :</label>
+					<input type="password" name="file_key" class="form-control" placeholder="Your file key">
+				</div>				
+				<br>
+				<div class="form-group file-input">
+					<input type="file" name="file" class="">
+				</div>
+				
+				<br>
+
+				<button type="submit" class="send-btn">Submit</button>	  		
+			</form>
 		</div>
-		
-		<div class="form-group">
-			<label>Receiver :</label>
-			<input type="text" name="receiver_name" class="form-control" placeholder="Receiver name">
-		</div>
-			
+	</div>
 
-		<div class="form-group">
-			<label>Enter key :</label>
-			<input type="password" name="file_key" class="form-control" placeholder="Your file key">
-		</div>				
-		<br>
-		<div class="form-group file-input">
-			<input type="file" name="file" class="">
-		</div>
-		
-		<br>
-
-		<button type="submit" class="send-btn">Submit</button>	  		
-	</form>
-	
 </body>
 </html>
 
