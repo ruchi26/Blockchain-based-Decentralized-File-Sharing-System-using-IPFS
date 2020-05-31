@@ -153,7 +153,7 @@ def retrieve_file():
                                                              } , chain = blockchain.chain, nodes = len(blockchain.nodes))
         else:
             return render_template('connect_blockchain.html', messages = {'message1' : message,
-                                                              'message2' : "Path of the uploaded file : " + file_path, 
+                                                              'message2' : "Path of the downloaded file : " + file_path, 
                                                              } , chain = blockchain.chain, nodes = len(blockchain.nodes))
 # Getting the full Blockchain
 @app.route('/get_chain', methods = ['GET'])
