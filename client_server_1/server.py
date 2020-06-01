@@ -18,6 +18,7 @@ import socketio
 
 sio = socketio.Client() 
 client_ip = app.config['NODE_ADDR']
+connection_status = False
 
 blockchain = Blockchain()
 
@@ -177,18 +178,25 @@ def my_response(message):
 
 @app.route('/connect_blockchain')
 def connect_blockchain():
+    global connection_status
+    nodes = len(blockchain.nodes)
+    if connection_status is False:
+        sio.connect('http://'+app.config['SERVER_IP'])
+        sio.emit('add_client_node', 
+                {'node_address' : client_ip['Host'] + ':' + str(client_ip['Port'])}
+                )
+        nodes = nodes + 1
 
-    sio.connect('http://'+app.config['SERVER_IP'])
-    sio.emit('add_client_node', 
-            {'node_address' : client_ip['Host'] + ':' + str(client_ip['Port'])}
-            )
     is_chain_replaced = blockchain.replace_chain()
+    connection_status = True
     return render_template('connect_blockchain.html', messages = {'message1' : "Welcome to the services page",
                                                                   'message2' : "Congratulations , you are now connected to the blockchain.",
-                                                                 } , chain = blockchain.chain, nodes = len(blockchain.nodes)+1)
+                                                                 } , chain = blockchain.chain, nodes = nodes)
 
 @app.route('/disconnect_blockchain')
 def disconnect_blockchain():
+    global connection_status
+    connection_status = False
     sio.emit('remove_client_node', 
             {'node_address' : client_ip['Host'] + ':' + str(client_ip['Port'])}
             )
