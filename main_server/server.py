@@ -24,6 +24,7 @@ def allowed_file(filename):
 def append_file_extension(uploaded_file, file_path):
     file_extension = uploaded_file.filename.rsplit('.', 1)[1].lower()
     user_file = open(file_path, 'a')
+
     user_file.write('\n' + file_extension)
     user_file.close()
 
@@ -71,18 +72,16 @@ def home():
 
 @app.route('/upload')
 def upload():
-    return render_template('upload.html')
+    return render_template('upload.html' , message = "Welcome!")
 
 @app.route('/download')
 def download():
-    return render_template('download.html')
+    return render_template('download.html' , message = "Welcome!")
 
 @app.route('/connect_blockchain')
 def connect_blockchain():
     is_chain_replaced = blockchain.replace_chain()
-    return render_template('connect_blockchain.html', messages = {'message1' : "Welcome to the services page",
-                                                                  'message2' : "Congratulations , you are now connected to the blockchain.",
-                                                                 } , chain = blockchain.chain, nodes = len(blockchain.nodes))
+    return render_template('connect_blockchain.html', chain = blockchain.chain, nodes = len(blockchain.nodes))
 
 @app.route('/add_file', methods=['POST'])
 def add_file():
@@ -120,11 +119,9 @@ def add_file():
                 message = 'Allowed file types are txt, pdf, png, jpg, jpeg, gif'
     
         if error_flag == True:
-            return render_template('upload.html')
+            return redirect(url_for('upload'))
         else:
-            return render_template('connect_blockchain.html', messages = {'message1' : message,
-                                                              'message2' : message2, 
-                                                             } , chain = blockchain.chain, nodes = len(blockchain.nodes))
+            return render_template('upload.html' , message = "File succesfully uploaded")
 
 @app.route('/retrieve_file', methods=['POST'])
 def retrieve_file():
@@ -152,13 +149,9 @@ def retrieve_file():
             message = 'File successfully downloaded'
 
         if error_flag == True:
-            return render_template('download.html', messages = {'message1' : message,
-                                                              'message2' : 'Enter the correct file hash and the key to download the file ',
-                                                             } , chain = blockchain.chain, nodes = len(blockchain.nodes))
+            return redirect(url_for('download'))
         else:
-            return render_template('connect_blockchain.html', messages = {'message1' : message,
-                                                              'message2' : "Path of the downloaded file : " + file_path, 
-                                                             } , chain = blockchain.chain, nodes = len(blockchain.nodes))
+            return render_template('download.html' , message = message)
 
 # Getting the full Blockchain
 @app.route('/get_chain', methods = ['GET'])

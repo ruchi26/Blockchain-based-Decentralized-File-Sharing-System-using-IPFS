@@ -26,8 +26,8 @@ html,body{
     max-height: 700px;
 }
 
-.send-btn{
-    width: 100%;
+.view-chain{
+    width: 50%;
     background-color: #14c871;
     color: white;
     border-radius: 4px;
@@ -39,11 +39,60 @@ html,body{
     border: 1px solid #cdd1d9;
 }
 
+.view-chain{
+    float: left;
+    width: 50%;
+    /* margin-right: 5%; */
+    background-color: #14c871;
+    color: white;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    padding: 8px 25px;
+    white-space: nowrap;
+    transition: 0.3s;
+    font-size: 14px;
+    /* display: inline-block; */
+    border-left: 1px solid #cdd1d9;
+    border-top: 1px solid #cdd1d9;
+    border-bottom: 1px solid #cdd1d9;
+    /* border: 1px solid #cdd1d9; */
+    text-align: center;
+}
+.send-btn{
+    float: left;
+    width: 50%;
+    background-color: #14c871;
+    color: white;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    padding: 8px 25px;
+    white-space: nowrap;
+    transition: 0.3s;
+    font-size: 14px;
+    /* display: inline-block; */
+    border-right: 1px solid #cdd1d9;
+    border-top: 1px solid #cdd1d9;
+    border-bottom: 1px solid #cdd1d9;
+    /* border: 1px solid #cdd1d9; */
+    text-align: center;
+}
+
+.view-chain:hover {
+    background: #206bfb;
+    color: #fff;
+    border-color: #206bfb;
+}
+
 .send-btn:hover {
     background: #206bfb;
     color: #fff;
     border-color: #206bfb;
 }
+
+.alert-custom{
+    background-color: #FFE6F5 !important;
+    color: black !important;
+  }
 
 h3{
     font-family: "Raleway", sans-serif;

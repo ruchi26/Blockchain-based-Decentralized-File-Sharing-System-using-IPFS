@@ -2,8 +2,6 @@
 <head>
 	<title>ADD FILE</title>
 	<link rel="stylesheet" href="static/css/handle_file.css">
-	<link href="static/css/style.css" rel="stylesheet">
-  	<link href="static/css/connect_blockchain.css" rel="stylesheet">
 	<link rel="stylesheet" href="static/vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="static/vendor/jquery/jquery-3.5.1.js">
 	<link rel="stylesheet" href="static/vendor/bootstrap/js/bootstrap.min.js">
@@ -12,9 +10,20 @@
 </head>
 
 <body>
+
 		
 	<div class="grandParentContaniner">
 		<div class="parentContainer">
+
+			<div class="container">
+				<div class="alert alert-custom fade in alert-dismissable show">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					{{ message }}
+				</div>
+			</div>
+
 			<form class="file-frm" method="post" action="/add_file" enctype="multipart/form-data">
 
 				<h3>Upload a file </h3>
@@ -30,11 +39,11 @@
 					<input type="text" name="receiver_name" class="form-control" placeholder="Receiver name">
 				</div>
 					
-
 				<div class="form-group">
 					<label>Enter key :</label>
 					<input type="password" name="file_key" class="form-control" placeholder="Your file key">
 				</div>				
+
 				<br>
 				<div class="form-group file-input">
 					<input type="file" name="file" class="">
@@ -42,7 +51,9 @@
 				
 				<br>
 
-				<button type="submit" class="send-btn">Submit</button>	  		
+				<!-- <a class="btn view-chain" href="{{ url_for('connect_blockchain') }}">View chain</a> -->
+				<a href="{{ url_for('connect_blockchain') }}"><input type=”button” class="view-chain" value="View chain"></a>
+				<button type="submit" class="send-btn">Submit</button>
 			</form>
 		</div>
 	</div>
