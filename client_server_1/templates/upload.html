@@ -2,6 +2,7 @@
 <head>
 	<title>ADD FILE</title>
 	<link rel="stylesheet" href="static/css/handle_file.css">
+	<link rel="stylesheet" href="static/css/connect_blockchain.css">
 	<link rel="stylesheet" href="static/vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="static/vendor/jquery/jquery-3.5.1.js">
 	<link rel="stylesheet" href="static/vendor/bootstrap/js/bootstrap.min.js">
@@ -18,7 +19,7 @@
 			<div class="container">
 				<div class="alert alert-custom fade in alert-dismissable show">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">×</span>
+						<!-- <span aria-hidden="true">×</span> -->
 					</button>
 					{{ message }}
 				</div>
@@ -52,8 +53,9 @@
 				<br>
 
 				<!-- <a class="btn view-chain" href="{{ url_for('connect_blockchain') }}">View chain</a> -->
+				<button type="submit" class="send-btn">Submit</button><br><br>
 				<a href="{{ url_for('connect_blockchain') }}"><input type=”button” class="view-chain" value="View chain"></a>
-				<button type="submit" class="send-btn">Submit</button>
+				
 			</form>
 		</div>
 	</div>
