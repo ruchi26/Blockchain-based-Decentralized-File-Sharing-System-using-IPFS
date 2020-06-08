@@ -24,7 +24,6 @@ def allowed_file(filename):
 def append_file_extension(uploaded_file, file_path):
     file_extension = uploaded_file.filename.rsplit('.', 1)[1].lower()
     user_file = open(file_path, 'a')
-
     user_file.write('\n' + file_extension)
     user_file.close()
 
@@ -83,6 +82,10 @@ def connect_blockchain():
     is_chain_replaced = blockchain.replace_chain()
     return render_template('connect_blockchain.html', chain = blockchain.chain, nodes = len(blockchain.nodes))
 
+@app.errorhandler(413)
+def entity_too_large(e):
+    return render_template('upload.html' , message = "Requested Entity Too Large!")
+
 @app.route('/add_file', methods=['POST'])
 def add_file():
     
@@ -103,6 +106,7 @@ def add_file():
                 message = 'No file selected for uploading'
 
             if user_file and allowed_file(user_file.filename):
+                error_flag = False
                 filename = secure_filename(user_file.filename)
                 file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 user_file.save(file_path)
@@ -110,16 +114,20 @@ def add_file():
                 sender = request.form['sender_name']
                 receiver = request.form['receiver_name']
                 file_key = request.form['file_key']
-                hashed_output1 = hash_user_file(file_path, file_key)
-                index = blockchain.add_file(sender, receiver, hashed_output1)
-                message = f'File successfully uploaded'
-                message2 =  f'It will be added to Block {index-1}'
-                error_flag = False
+                try:
+                    hashed_output1 = hash_user_file(file_path, file_key)
+                    index = blockchain.add_file(sender, receiver, hashed_output1)
+                except Exception as err:
+                    message = err
+                    error_flag = True
+                # message = f'File successfully uploaded'
+                # message2 =  f'It will be added to Block {index-1}'
             else:
+                error_flag = True
                 message = 'Allowed file types are txt, pdf, png, jpg, jpeg, gif'
     
         if error_flag == True:
-            return redirect(url_for('upload'))
+            return render_template('upload.html' , message = message)
         else:
             return render_template('upload.html' , message = "File succesfully uploaded")
 
@@ -145,13 +153,16 @@ def retrieve_file():
             error_flag = False
             file_key = request.form['file_key']
             file_hash = request.form['file_hash']
-            file_path = retrieve_from_hash(file_hash, file_key)
-            message = 'File successfully downloaded'
+            try:
+                file_path = retrieve_from_hash(file_hash, file_key)
+            except Exception as err:
+                message = err
+                error_flag = True
 
         if error_flag == True:
-            return redirect(url_for('download'))
-        else:
             return render_template('download.html' , message = message)
+        else:
+            return render_template('download.html' , message = "File successfully downloaded")
 
 # Getting the full Blockchain
 @app.route('/get_chain', methods = ['GET'])

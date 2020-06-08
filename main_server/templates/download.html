@@ -17,7 +17,7 @@
 			<div class="container">
 				<div class="alert alert-custom fade in alert-dismissable show">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">×</span>
+						<!-- <span aria-hidden="true">×</span> -->
 					</button>
 					{{ message }}
 				</div>
@@ -30,12 +30,12 @@
 
 				<div class="form-group">
 					<label>Key :</label>
-					<input type="password" name="file_key" class="form-control" placeholder="Key shared by uploader">
+					<input type="password" name="file_key" class="form-control" placeholder="Key shared by uploader" required>
 				</div>
 				<br>
 				<div class="form-group">
 					<label>File hash :</label>
-					<input type="text" name="file_hash" class="form-control" placeholder="File hash">
+					<input type="text" name="file_hash" class="form-control" placeholder="File hash" required>
 				</div>				
 				
 				<br>
