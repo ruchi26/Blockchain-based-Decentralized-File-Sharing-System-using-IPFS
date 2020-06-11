@@ -113,8 +113,10 @@ def add_file():
                     hashed_output1 = hash_user_file(file_path, file_key)
                     index = blockchain.add_file(sender, receiver, hashed_output1)
                 except Exception as err:
-                    message = err
+                    message = str(err)
                     error_flag = True
+                    if "ConnectionError:" in message:
+                        message = "Gateway down or bad Internet!"
                 # message = f'File successfully uploaded'
                 # message2 =  f'It will be added to Block {index-1}'
             else:
@@ -151,8 +153,10 @@ def retrieve_file():
             try:
                 file_path = retrieve_from_hash(file_hash, file_key)
             except Exception as err:
-                message = err
+                message = str(err)
                 error_flag = True
+                if "ConnectionError:" in message:
+                    message = "Gateway down or bad Internet!"
 
         if error_flag == True:
             return render_template('download.html' , message = message)
