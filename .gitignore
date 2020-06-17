@@ -1,5 +1,4 @@
-client_server_1/my_constants.py
-main_server/my_constants.py
+
 main_server/__pycache__
 client_server_1/__pycache__
 main_server/.DS_Store
@@ -9,4 +8,3 @@ main_server/uploads
 main_server/downloads
 client_server_1/uploads
 client_server_1/downloads
-
